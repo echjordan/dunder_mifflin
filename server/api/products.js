@@ -16,17 +16,17 @@ router.get('/', (req, res, next) => {
 //   .catch(next)
 // })
 
-router.get('/:productId', (req, res, next) => {
+router.get('/search', (req, res, next) => {
   Product.findOne({
-    where: {id: req.params.productId}
+    where: {title: req.query.title}
   })
   .then(product => res.json(product))
   .catch(next)
 })
 
-router.get('/:productName', (req, res, next) => {
+router.get('/:productId', (req, res, next) => {
   Product.findOne({
-    where: {title: req.params.productName}
+    where: {id: req.params.productId}
   })
   .then(product => res.json(product))
   .catch(next)
