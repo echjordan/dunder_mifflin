@@ -7,21 +7,20 @@ router.get('/', (req, res, next) => {
     .then(orders => res.json(orders))
     .catch(next)
 })
-
-router.get('/:orderId', (req, res, next) => {
-  Order.findById(req.params.orderId)
-    .then(order => res.json(order))
-    .catch(next)
-})
-
 router.get('/search', (req, res, next) => {
-  console.log("the quer", req.query.status)
   Order.findOne({
     where: {status: req.query.status}
   })
   .then(orders => res.json(orders))
   .catch(next)
 })
+router.get('/:orderId', (req, res, next) => {
+  Order.findById(req.params.orderId)
+    .then(order => res.json(order))
+    .catch(next)
+})
+
+
 
 router.put('/:orderId', (req, res, next) => {
   Order.update(req.body, {
