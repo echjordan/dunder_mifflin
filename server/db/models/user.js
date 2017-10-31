@@ -21,9 +21,6 @@ const User = db.define('user', {
   password: {
     type: Sequelize.STRING
   },
-  passwordReset: {
-    type: Sequelize.BOOLEAN
-  },
   salt: {
     type: Sequelize.STRING
   },
