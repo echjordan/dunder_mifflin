@@ -21,7 +21,7 @@ Category.belongsToMany(Product, {through: 'CategoryProduct'});
 Product.belongsToMany(Category, {through: 'CategoryProduct'});
 Review.belongsTo(User);
 User.hasMany(Review);
-Review.belongsTo(Product)
+Review.belongsTo(Product);
 Product.hasMany(Review);
 
 
