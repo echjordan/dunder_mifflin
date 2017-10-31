@@ -2,6 +2,7 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
+// ***ADMIN FEATURES: GET '/users' shows all user data
 router.get('/', (req, res, next) => {
   User.findAll({
     // explicitly select only the id and email fields - even though
@@ -9,6 +10,51 @@ router.get('/', (req, res, next) => {
     // send everything to anyone who asks!
     attributes: ['id', 'email']
   })
+  .then(users => res.json(users))
+  .catch(next)
+})
+
+// GET '/users/userid'
+router.get('/:userId', (req, res, next) => {
+  User.findAll({
+    attributes: ['id', 'email']
+  })
+  .then(users => res.json(users))
+  .catch(next)
+})
+
+// PUT '/users/userid'
+// ***ADMIN FEATURES: PUT '/users/userid'
+router.put('/:userId', (req, res, next) => {
+  User.update({
+    where: req.params.id
+  })
+  .then(user => res.json(user))
+  .catch(next)
+})
+
+// ***ADMIN FEATURES: DELETE '/users/userid'
+router.delete('/:userId', (req, res, next) => {
+  User.destroy({
+    where: req.params.id
+  })
+  .catch(next)
+})
+
+// GET '/users/userid/reviews'
+router.get('/:userId/reviews', (req, res, next) => {
+  User.findAll({
+    attributes: ['id', 'email']
+  })
     .then(users => res.json(users))
+    .catch(next)
+})
+
+// GET '/users/userid/orderId'
+router.get('/:userId/:orderId', (req, res, next) => {
+  User.findOne({
+    where: req.params.id
+  })
+    .then(user => res.json(user))
     .catch(next)
 })
