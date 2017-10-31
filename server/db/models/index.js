@@ -20,8 +20,6 @@ const Category = require('./category');
 
 Category.belongsToMany(Product, {through: 'CategoryProduct'});
 Product.belongsToMany(Category, {through: 'CategoryProduct'});
-
-// USER ASSOCIATIONS
 // User.hasMany(Review);
 // Review.belongsTo(User);
 // User.hasMany(Order);

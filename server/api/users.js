@@ -1,60 +1,43 @@
-const router = require('express').Router()
-const {User} = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const {User} = require('../db/models');
+module.exports = router;
 
-// ***ADMIN FEATURES: GET '/users' shows all user data
 router.get('/', (req, res, next) => {
-  User.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-    attributes: ['id', 'email']
-  })
+  User.findAll()
   .then(users => res.json(users))
   .catch(next)
 })
 
-// GET '/users/userid'
 router.get('/:userId', (req, res, next) => {
-  User.findAll({
-    attributes: ['id', 'email']
-  })
-  .then(users => res.json(users))
-  .catch(next)
-})
-
-// PUT '/users/userid'
-// ***ADMIN FEATURES: PUT '/users/userid'
-router.put('/:userId', (req, res, next) => {
-  User.update({
-    where: req.params.id
-  })
+  User.findById(req.params.userId)
   .then(user => res.json(user))
   .catch(next)
 })
 
-// ***ADMIN FEATURES: DELETE '/users/userid'
-router.delete('/:userId', (req, res, next) => {
-  User.destroy({
-    where: req.params.id
+router.put('/:userId', (req, res, next) => {
+  User.update(req.body, {
+    where: {
+      id: req.params.userId
+    }
   })
+  .then(() => res.sendStatus(200))
   .catch(next)
 })
 
-// GET '/users/userid/reviews'
-router.get('/:userId/reviews', (req, res, next) => {
-  User.findAll({
-    attributes: ['id', 'email']
+router.delete('/:userId', (req, res, next) => {
+  User.destroy({
+    where: {
+      id: req.params.userId
+    }
   })
-    .then(users => res.json(users))
-    .catch(next)
+  .then(() => res.sendStatus(200))
+  .catch(next)
 })
 
-// GET '/users/userid/orderId'
-router.get('/:userId/:orderId', (req, res, next) => {
-  User.findOne({
-    where: req.params.id
-  })
-    .then(user => res.json(user))
+// HAVEN'T TESTED
+router.get('/:userId/reviews', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => user.getReviews())
+    .then(reviews => res.json(reviews))
     .catch(next)
 })

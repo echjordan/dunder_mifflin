@@ -6,17 +6,23 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: {msg: 'Must be an email'}
+    }
   },
   name: {
     type: Sequelize.STRING,
     allowNull: false
   },
   admin: {
-    type: Sequelize.BOOLEAN,
+    type: Sequelize.BOOLEAN
   },
   password: {
     type: Sequelize.STRING
+  },
+  passwordReset: {
+    type: Sequelize.BOOLEAN
   },
   salt: {
     type: Sequelize.STRING
@@ -37,13 +43,11 @@ User.prototype.correctPassword = function (candidatePwd) {
 }
 
 // trigger password reset for a user (that is, the next time they successfully log in with their old password, they are prompted for a new one), so that I can be proactive in getting users to change their passwords after a period of time
-User.prototype.passwordReset = function () {
-  // check date that password was created: datePwdCreated
-  // compare today's date to datePwdCreated
-  // decide on a time period that requires a new password (182 days?)
-  // if it's >= 182 days, propmt user to change password (alert?)
-  // if it's < 182 days, do nothing
-}
+// User.prototype.passwordReset = function () {
+//   if (Math.abs(User.updatedAt - Date.now()) > 182) {
+//     //
+//   }
+// }
 
 /**
  * classMethods
