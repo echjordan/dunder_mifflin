@@ -129,7 +129,7 @@ async function seed () {
       available: true
     }),
     Product.create({
-      tite: 'Newspaper',
+      title: 'Newspaper',
       description: 'Get a subscription to the failing New York Times.',
       photos: ['https://i.imgur.com/qxPbQUu.jpg', 'https://i.imgur.com/4NRUluq.jpg'],
       price: 25.00,
