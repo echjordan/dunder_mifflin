@@ -24,6 +24,15 @@ router.get('/:productId', (req, res, next) => {
   .catch(next)
 })
 
+router.get('/:productId/reviews', (req, res, next) => {
+  Product.findOne({
+    where: {id: req.params.productId}
+  })
+  .then(product => product.getReviews())
+  .then(reviews => res.json(reviews))
+  .catch(next)
+})
+
 // ADMIN ROUTES
 router.post('/', (req, res, next) => {
   Product.create(req.body)

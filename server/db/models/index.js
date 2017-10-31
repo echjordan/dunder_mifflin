@@ -3,6 +3,8 @@ const Product = require('./product');
 const Category = require('./category');
 const Order = require('./order');
 const Purchase = require('./purchase');
+const Review = require('./review');
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -23,7 +25,11 @@ Purchase.belongsTo(Order);
 Order.hasMany(Purchase);
 Purchase.belongsTo(Product);
 Product.hasMany(Purchase);
+Review.belongsTo(User);
+User.hasMany(Review);
+Review.belongsTo(Product);
+Product.hasMany(Review);
 
 module.exports = {
-  User, Product, Category, Order, Purchase
+  User, Product, Category, Order, Purchase, Review
 }
