@@ -8,6 +8,13 @@ const User = db.define('user', {
     unique: true,
     allowNull: false
   },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  admin: {
+    type: Sequelize.BOOLEAN,
+  },
   password: {
     type: Sequelize.STRING
   },
@@ -19,6 +26,7 @@ const User = db.define('user', {
   }
 })
 
+
 module.exports = User
 
 /**
@@ -26,6 +34,15 @@ module.exports = User
  */
 User.prototype.correctPassword = function (candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt) === this.password
+}
+
+// trigger password reset for a user (that is, the next time they successfully log in with their old password, they are prompted for a new one), so that I can be proactive in getting users to change their passwords after a period of time
+User.prototype.passwordReset = function () {
+  // check date that password was created: datePwdCreated
+  // compare today's date to datePwdCreated
+  // decide on a time period that requires a new password (182 days?)
+  // if it's >= 182 days, propmt user to change password (alert?)
+  // if it's < 182 days, do nothing
 }
 
 /**
