@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
-const User = require('./user');
 
 const Review = db.define('review', {
   title: {
@@ -8,16 +7,18 @@ const Review = db.define('review', {
   },
   stars: {
     type: Sequelize.INTEGER,
-    allowNull: false //can leave review with just stars if wanted? or no?
+    allowNull: false
   },
   content: {
-    type: Sequelize.TEXT
-  }
-}, {
-    defaultScope: {
-      include: [{model: User}] // eager loading
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      len: {
+      args: [10, 500],
+      msg: 'Please provide text within 10 to 500 characters.'
+      }
     }
   }
-)
+})
 
 module.exports = Review;
