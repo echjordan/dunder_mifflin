@@ -34,7 +34,6 @@ router.delete('/:userId', (req, res, next) => {
   .catch(next)
 })
 
-// HAVEN'T TESTED
 router.get('/:userId/reviews', (req, res, next) => {
   User.findById(req.params.userId)
     .then(user => user.getReviews())

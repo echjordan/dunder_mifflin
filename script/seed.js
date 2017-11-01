@@ -10,7 +10,7 @@
  * Now that you've got the main idea, check it out in practice below!
  */
 const db = require('../server/db')
-const {User, Product, Category} = require('../server/db/models')
+const {User, Product, Category, Purchase, Order, Review } = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -19,8 +19,8 @@ async function seed () {
   // executed until that promise resolves!
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({name: 'Cody', email: 'cody@email.com', password: '123', admin: true}),
+    User.create({name: 'Murphy', email: 'murphy@email.com', password: '123', admin: false})
   ])
 
   const categories = await Promise.all([
@@ -31,6 +31,38 @@ async function seed () {
     Category.create({ name: 'kids' }),
     Category.create({ name: 'crafts' }),
     Category.create({ name: 'home'})
+  ])
+
+  const purchases = await Promise.all([
+    Purchase.create({ quantity: 7, price: 5.00 }),
+    Purchase.create({ quantity: 2, price: 3.00 }),
+    Purchase.create({ quantity: 5, price: 1.00 }),
+    Purchase.create({ quantity: 10, price: 3.00 }),
+    Purchase.create({ quantity: 2, price: 10.00 }),
+    Purchase.create({ quantity: 3, price: 10.00 }),
+    Purchase.create({ quantity: 5, price: 7.00 })
+  ])
+
+  const orders = await Promise.all([
+    //processing, cancelled, completed, created
+    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob@bob.com'  }),
+    Order.create({ status: 'processing', subTotal: 3.49, address: "100 Dreary Lane", email: 'em@em.com' }),
+    Order.create({ status: 'completed', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob1@bob.com' }),
+    Order.create({ status: 'cancelled', subTotal: 3.49, address: "100 Dreary Lane", email: 'bo2b@bob.com' }),
+    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob3@bob.com' }),
+    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob4@bob.com' }),
+    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob5@bob.com' })
+  ])
+
+  const reviews = await Promise.all([
+    //processing, cancelled, completed, created
+    Review.create({ title: 'THIS SUX', stars: 0, content: 'THE WORST PAPER EVER IM SO PISSED' }),
+    Review.create({ title: 'THIS SUX', stars: 4, content: 'THE WORST PAPER EVER IM SO PISSED' }),
+    Review.create({ title: 'THIS SUX', stars: 0, content: 'THE WORST PAPER EVER IM SO PISSED' }),
+    Review.create({ title: 'THIS SUX', stars: 5, content: 'It is ok. I do not hate this paper.' }),
+    Review.create({ title: 'THIS SUX', stars: 1, content: 'THE WORST PAPER EVER IM SO PISSED' }),
+    Review.create({ title: 'THIS SUX', stars: 2, content: 'THE WORST PAPER EVER IM SO PISSED' }),
+    Review.create({ title: 'THIS SUX', stars: 0, content: 'THE WORST PAPER EVER IM SO PISSED' })
   ])
 
   const products = await Promise.all([
@@ -273,7 +305,7 @@ async function seed () {
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users, ${products.length} products, ${categories.length} categories`)
+  console.log(`seeded ${users.length} users, ${products.length} products, ${categories.length} categories, ${orders.length} orders, ${reviews.length} reviews, ${purchases.length} purchases`)
   console.log(`seeded successfully`)
 }
 
