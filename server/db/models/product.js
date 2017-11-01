@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const {Promise} = Sequelize;
 const db = require('../db');
 const Category = require('./Category');
 
@@ -25,7 +26,6 @@ const Product = db.define('product', {
     available:  {
       type: Sequelize.BOOLEAN
     }
-
   }, {
     defaultScope: {
       include: [{model: Category}]
@@ -33,13 +33,21 @@ const Product = db.define('product', {
   }
 )
 
+Product.prototype.setCategoriesByName = function(categories) {
+  return Promise
+    .map(categories, name => Category.byName(name))
+    .then(cats => {
+      return this.setCategories(cats.map(({id}) => id))
+    })
+}
+
 module.exports = Product;
 
 //Method to edit the quantity of a product
 /**
  * instanceMethods
  */
-Product.prototype.changeQuantity= function (amount) {
+Product.prototype.changeQuantity = function (amount) {
   return this.quantity += amount;
 }
 
