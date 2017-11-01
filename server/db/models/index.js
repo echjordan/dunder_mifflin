@@ -33,6 +33,8 @@ Purchase.belongsTo(Order);
 Order.hasMany(Purchase);
 Product.hasMany(Purchase);
 Purchase.belongsTo(Product);
+// Product.belongsTo(Order);
+// Order.hasMany(Product);
 
 
 module.exports = {
