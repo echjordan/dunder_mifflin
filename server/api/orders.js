@@ -14,13 +14,14 @@ router.post('/', (req, res, next) => {
       email: req.body.email,
       address: req.body.address,
       userId: req.body.userId,
-      subTotal: req.body.total,
+      subTotal: req.body.subTotal,
       status: 'Processing'
     })
   .then(order => {
     order.createPurchase({
       productId: req.body.productId,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
+      price: req.body.price
     })
   })
     .then(order => res.json(order))
@@ -58,7 +59,7 @@ router.get('/:orderId/products', (req, res, next) => {
   .catch(next)
 } )
 
-router.put('/orderId/status', (req, res, next) => {
+router.put('/:orderId/status', (req, res, next) => {
   Order.update(
     {status: req.body.status},
     {where: {id: req.params.orderId}})

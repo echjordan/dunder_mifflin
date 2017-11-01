@@ -36,14 +36,14 @@ router.get('/:productId/reviews', (req, res, next) => {
 // ADMIN ROUTES
 router.post('/', (req, res, next) => {
   Product.create(req.body)
-  .then(() => res.status(200))
+  .then(() => res.sendStatus(200))
   .catch(next)
 })
 
 router.put('/:productId', (req, res, next) => {
   Product.update(req.body, {
-    where: {id: req.params.id}
+    where: {id: req.params.productId}
   })
-  .then(() => res.status(200))
+  .then(() => res.sendStatus(200))
   .catch(next)
 })
