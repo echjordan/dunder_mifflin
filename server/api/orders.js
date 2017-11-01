@@ -50,6 +50,13 @@ router.get('/:orderId', (req, res, next) => {
   .catch(next)
 })
 
+// NEW ROUTE
+router.get('/:userId', (req, res, next) => {
+  Order.findById(req.params.userId)
+  .then(orders => res.json(orders))
+  .catch(next)
+})
+
 router.get('/:orderId/products', (req, res, next) => {
   Order.findOne({
     where: {id: req.params.orderId}
