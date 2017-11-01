@@ -21,7 +21,7 @@ const Order = db.define('order', {
   }
   }, {
     defaultScope: {
-      include: [{model: Purchase}]
+      include: [{all: true, nested: true}]
     }
   }
 )

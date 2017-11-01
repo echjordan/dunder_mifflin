@@ -33,6 +33,9 @@ Purchase.belongsTo(Order);
 Order.hasMany(Purchase);
 Product.hasMany(Purchase);
 Purchase.belongsTo(Product);
+
+
+// Order.belongsToManyProduct({through: Purchase})
 // Product.belongsTo(Order);
 // Order.hasMany(Product);
 

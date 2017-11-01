@@ -2,7 +2,9 @@ const router = require('express').Router();
 const {Purchase, Order} = require('../db/models');
 
 router.get('/', (req, res, next) => {
-  Order.findAll()
+  Order.findAll({
+    include: [{all: true, nested: true}]
+  })
     .then(orders => res.json(orders))
     .catch(next)
 })
