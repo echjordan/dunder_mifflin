@@ -8,9 +8,17 @@ class Products extends Component{
   }
 
   render(){
+    const products = this.props.products
     return(
-      <div>
-        <h1> It me</h1>
+      <div className = 'product-container'>
+        <ul className = 'product-list'>
+        {
+          products.map(product =>
+            <li key={product.id}>
+                {'PRODUCT: ' + product.title + ',       DESCRIPTION:' + product.description + 'IMAGES: '} <img className='product-photos' src={product.photos[0]}/>
+            </li>)
+        }
+        </ul>
       </div>
     )
   }
