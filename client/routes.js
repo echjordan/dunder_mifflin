@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, Products, Admin, UserPortal} from './components'
+import { Main, Login, Signup, UserHome, Products, Admin, UserPortal, Cart} from './components'
 import {me, fetchProducts, fetchAllUsers} from './store'
 
 /**
@@ -25,6 +25,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/cart" component={Cart} />
             <Route exact path="/" component={Products} />
             <Route path="/admin" component={Admin} />
             {
