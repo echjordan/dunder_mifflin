@@ -39,7 +39,10 @@ export class Admin extends Component {
     const products = this.props.products;
     return (
       <div>
-      <h2>Orders:</h2>
+        <div>
+          <h1>Welcome, Admin!</h1>
+        </div>
+      <h3>Orders:</h3>
       {
         orders.map(order =>
           (<div key={order.id}>
@@ -62,7 +65,7 @@ export class Admin extends Component {
           </div>)
         )
       }
-      <h2>Users:</h2>
+      <h3>Users:</h3>
       {
         users.map(user =>
           (<div key={user.id}>
@@ -97,7 +100,7 @@ export class Admin extends Component {
           </div>)
         )
       }
-      <h2>Products:</h2>
+      <h3>Products:</h3>
       { //link to single product page
         products.map(product =>
           (<ul key={product.id}>
