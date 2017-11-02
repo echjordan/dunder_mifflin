@@ -44,10 +44,10 @@ export class Admin extends Component {
         orders.map(order =>
           (<div key={order.id}>
             <div>Order #{order.id}
-              <div>Current Status: {order.status} | Date Created: {order.createdAt.slice(5, 7)}-{order.createdAt.slice(8, 10)}-{order.createdAt.slice(0, 4)} | Subtotal: ${order.subTotal}</div>
+              <div>Date Created: {order.createdAt.slice(5, 7)}-{order.createdAt.slice(8, 10)}-{order.createdAt.slice(0, 4)} | Customer Contact: {order.email} | Subtotal: ${order.subTotal}</div>
               <div>
                   <form>
-                      <label>Change Status: </label>
+                      <label>Status: </label>
                         <select defaultValue={order.status} onChange={this.handleChange.bind(this, order.id)}>
                           <option value="created">Created</option>
                           <option value="processing">Processing</option>
@@ -58,7 +58,7 @@ export class Admin extends Component {
                     </form>
                 </div>
               </div>
-            <li>Products: ?</li>
+            <div>Products: ?</div>
           </div>)
         )
       }
