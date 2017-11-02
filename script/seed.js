@@ -20,7 +20,11 @@ async function seed () {
 
   const users = await Promise.all([
     User.create({name: 'Cody', email: 'cody@email.com', password: '123', admin: true}),
-    User.create({name: 'Murphy', email: 'murphy@email.com', password: '123', admin: false})
+    User.create({name: 'Murphy', email: 'murphy@email.com', password: '123', admin: false}),
+    User.create({name: 'Jen', email: 'jen@email.com', password: '123', admin: false}),
+    User.create({name: 'Melissa', email: 'melissa@email.com', password: '123', admin: false}),
+    User.create({name: 'Doug', email: 'doug@email.com', password: '123', admin: false}),
+    User.create({name: 'John', email: 'john@email.com', password: '123', admin: false})
   ])
 
   const categories = await Promise.all([
@@ -45,13 +49,13 @@ async function seed () {
 
   const orders = await Promise.all([
     //processing, cancelled, completed, created
-    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob@bob.com'  }),
-    Order.create({ status: 'processing', subTotal: 3.49, address: "100 Dreary Lane", email: 'em@em.com' }),
-    Order.create({ status: 'completed', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob1@bob.com' }),
-    Order.create({ status: 'cancelled', subTotal: 3.49, address: "100 Dreary Lane", email: 'bo2b@bob.com' }),
-    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob3@bob.com' }),
-    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob4@bob.com' }),
-    Order.create({ status: 'created', subTotal: 3.49, address: "100 Dreary Lane", email: 'bob5@bob.com' })
+    Order.create({ status: 'created', subTotal: 5.00, address: "1 Dreary Lane", email: 'cody@email.com'  }),
+    Order.create({ status: 'processing', subTotal: 10.00, address: "1 Dreary Lane", email: 'cody@email.com' }),
+    Order.create({ status: 'completed', subTotal: 15.00, address: "2 Dreary Lane", email: 'murphy@email.com' }),
+    Order.create({ status: 'cancelled', subTotal: 20.00, address: "2 Dreary Lane", email: 'murphy@email.com' }),
+    Order.create({ status: 'created', subTotal: 25.00, address: "3 Dreary Lane", email: 'jen@email.com' }),
+    Order.create({ status: 'created', subTotal: 30.00, address: "3 Dreary Lane", email: 'jen@email.com' }),
+    Order.create({ status: 'created', subTotal: 35.00, address: "4 Dreary Lane", email: 'melissa@email.com' })
   ])
 
   const reviews = await Promise.all([
