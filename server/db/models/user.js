@@ -13,7 +13,6 @@ const User = db.define('user', {
   },
   name: {
     type: Sequelize.STRING,
-    allowNull: false
   },
   admin: {
     type: Sequelize.BOOLEAN

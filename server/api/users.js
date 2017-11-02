@@ -40,3 +40,10 @@ router.get('/:userId/reviews', (req, res, next) => {
     .then(reviews => res.json(reviews))
     .catch(next)
 })
+
+router.get('/:userId/orders', (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => user.getOrders())
+    .then(orders => res.json(orders))
+    .catch(next)
+})
