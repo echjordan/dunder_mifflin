@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { fetchUserOrders } from '../store/userPortal'
+import {fetchUserOrders} from '../store/userPortal'
+import { NavLink } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -17,15 +18,26 @@ export class UserPortal extends Component {
   }
 
   render(){
-    const orders = this.props.orders;
-    console.log('this.props: ', this.props)
-    console.log('ORDERS: ', orders)
+    const orders = this.props.userportal;
+    console.log(orders)
+    const purchases = orders.purchases;
+    console.log('PURCHASES: ', orders)
   return (
       <div>
         <div className = "orders-container">
+        <h3>{this.props.user.name}'s Orders</h3>
           <ul className = "orders-list">
-        <h3>test</h3>
-
+            {
+            orders.map((order, index) =>
+              (<li key={order.id}>{'ORDER #: ' + order.id + ', STATUS: ' + order.status + ', DATE: ' + order.createdAt + ', SUBTOTAL: $' + order.subTotal}
+              <ul>
+                  {
+                    orders[index].purchases.map((purchase, index2) =>
+                    (<li key={purchase.id}><NavLink to={`/products/${orders[index].purchases[index2].product.id}`}>{'ITEM: ' + orders[index].purchases[index2].product.title + ', QUANTITY: '  + orders[index].purchases[index2].product.quantity}</NavLink></li>))
+                    }
+                    </ul>
+            </li>))
+            }
         </ul>
       </div>
     </div>
@@ -36,7 +48,8 @@ export class UserPortal extends Component {
 /**
  * CONTAINER
  */
-const mapStateToProps = ({orders, user}) => ({orders, user})
+const mapStateToProps = ({userportal, user}) => ({userportal, user})
 const mapDispatchToProps = {fetchUserOrders}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPortal)
+
