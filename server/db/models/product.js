@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const {Promise} = Sequelize;
 const db = require('../db');
 const Category = require('./Category');
+const Review = require('./Review')
 
 const Product = db.define('product', {
     title: {
@@ -28,7 +29,7 @@ const Product = db.define('product', {
     }
   }, {
     defaultScope: {
-      include: [{model: Category}]
+      include: [{model: Category}, {model: Review}]
     }
   }
 )

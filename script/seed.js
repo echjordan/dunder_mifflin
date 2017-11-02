@@ -139,7 +139,7 @@ async function seed () {
     Product.create({
       title: 'Invisible Paper',
       description:	"When this paper arrives in the mail, you're going to have to trust us that it's in the box. Final sale.",
-      photos:	['https://i.imgur.com/OzHSCPf.png'],
+      photos: ['https://i.imgur.com/lHm1wSe.jpg', 'https://i.imgur.com/h3FHoiW.jpg'],
       price:	0.00,
       quantity:	75,
       available: true
