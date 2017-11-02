@@ -14,11 +14,11 @@ import axios from 'axios'
 
  export const deleteProduct = (id) => (dispatch) => {
    axios.delete(`/api/products/${id}`)
-     .then(res => dispatch(removeProduct()))
+     .then(() => dispatch(removeProduct()))
      .catch(err => console.error(err))
  };
 
- export default function reducer(product={}, action){
+ export default function reducer(product = {}, action){
    switch (action.type){
     case GET_SINGLE_PRODUCT:
       return action.product
