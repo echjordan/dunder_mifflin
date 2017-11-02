@@ -10,14 +10,6 @@ export const fetchProducts = () => (dispatch) => {
   .catch(err => console.error(err))
 };
 
-export const pushPurchase = function (purchase) {
-  // return function thunk(dispatch) {
-  //   dispatch(addPurchase(purchase))
-  //   const newTotal = initialState.subTotal + (purchase.qty * purchase.price)
-  //   dispatch(updateSubTotal(newTotal))
-  // }
-}
-
 export default function reducer(products = [], action){
   switch (action.type){
     case GET_PRODUCTS:
