@@ -5,9 +5,15 @@ const db = require('../db')
 const Category = db.define('category', {
   name: {
     type: Sequelize.STRING,
+    unique: true,
   }
 }
 )
+
+Category.byName = function(name) {
+  return Category.findOrCreate({ where: { name } })
+    .then(([cat]) => cat)
+}
 
 module.exports = Category;
 
