@@ -59,7 +59,7 @@ router.get('/:orderId/products', (req, res, next) => {
   .catch(next)
 } )
 
-router.put('/:orderId/status', (req, res, next) => {
+router.put('/:orderId', (req, res, next) => {
   Order.update(
     {status: req.body.status},
     {where: {id: req.params.orderId}})
