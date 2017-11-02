@@ -8,6 +8,8 @@ router.get('/', (req, res, next) => {
     .then(orders => res.json(orders))
     .catch(next)
 })
+
+//This needs to talk to a thunk creator that will send back an array of objects containing purcahses
 router.post('/', (req, res, next) => {
   Order.create(
     {
@@ -18,15 +20,21 @@ router.post('/', (req, res, next) => {
       status: 'Processing'
     })
   .then(order => {
-    order.createPurchase({
-      productId: req.body.productId,
-      quantity: req.body.quantity,
-      price: req.body.price
+    const orderId = order.id
+    const purchases = req.body.purchases
+    purchases.forEach(purchase => {
+      order.createPurchase({
+        orderId: orderId,
+        productId: purchase.productId,
+        quantity: purchase.quantity,
+        price: purchase.price
+      })
     })
   })
-    .then(order => res.json(order))
+    .then(() => res.sendStatus(200))
     .catch(next)
 })
+
 router.get('/status', (req, res, next) => {
   Order.findAll({
     where: {status: req.query.status}
@@ -34,6 +42,7 @@ router.get('/status', (req, res, next) => {
   .then(orders => res.json(orders))
   .catch(next)
 })
+
 router.get('/date', (req, res, next) => {
   Order.findAll({
     where: {createdAt: req.query.date}
@@ -63,7 +72,7 @@ router.put('/:orderId/status', (req, res, next) => {
   Order.update(
     {status: req.body.status},
     {where: {id: req.params.orderId}})
-  .then(newOrder => res.json(newOrder))
+  .then(() => res.sendStatus(200))
   .catch(next)
 })
 
