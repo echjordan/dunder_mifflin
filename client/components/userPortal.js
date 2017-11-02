@@ -19,9 +19,7 @@ export class UserPortal extends Component {
 
   render(){
     const orders = this.props.userportal;
-    console.log(orders)
     const purchases = orders.purchases;
-    console.log('PURCHASES: ', orders)
   return (
       <div>
         <div className = "orders-container">
@@ -33,7 +31,7 @@ export class UserPortal extends Component {
               <ul>
                   {
                     orders[index].purchases.map((purchase, index2) =>
-                    (<li key={purchase.id}><NavLink to={`/products/${orders[index].purchases[index2].product.id}`}>{'ITEM: ' + orders[index].purchases[index2].product.title + ', QUANTITY: '  + orders[index].purchases[index2].product.quantity}</NavLink></li>))
+                    (<li key={purchase.id}><NavLink to={`/products/${orders[index].purchases[index2].product.id}`}>{'ITEM: ' + orders[index].purchases[index2].product.title + ', QUANTITY: '  + orders[index].purchases[index2].quantity}</NavLink></li>))
                     }
                     </ul>
             </li>))
