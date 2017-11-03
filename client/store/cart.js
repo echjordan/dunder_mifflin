@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from './index';
 //Idx of the purchase is the current location in the purchases array
 let initialState = {
   purchases: [],
@@ -27,8 +28,8 @@ export const postProducts = function (info) {
     axios.post('/orders', {
       eamil: info.email,
       address: info.address,
-      subTotal: this.initialState.subTotal,
-      purchases: this.initialState.purchases,
+      subTotal: store.getState().subTotal,
+      purchases: store.getState().purchases,
     })
     .then(order => dispatch(submitPurchases(order)))
     .catch(err => console.log(err))
@@ -37,13 +38,14 @@ export const postProducts = function (info) {
 export const pushPurchase = function (productId) {
   return function thunk (dispatch)  {
     axios.get(`/api/products/${productId}`)
+    .then(res => res.data)
     .then(product => {
         let purchase = {};
         purchase.photo = product.photos[0];
         purchase.title = product.title;
         purchase.quantity = 1;
         purchase.price = product.price;
-      const newTotal = Number(initialState.subTotal + (purchase.price))
+      const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price)
 
       dispatch(addPurchase(purchase))
       dispatch(updateSubTotal(newTotal))
@@ -59,16 +61,17 @@ export const editPurchase = function (purchaseIdx, newQuantity)  {
 }
 export const destroyPurchase = function (purchaseIdx) {
   return function thunk (dispatch)  {
-    const price = initialState.purchases[purchaseIdx].price;
-    const quantity = initialState.purchases[purchaseIdx].quantity;
-    const newTotal = Number(initialState.subTotal - (price * quantity))
+    let info = store.getState().cart;
+    const price = info.purchases[purchaseIdx].price;
+    const quantity = info.purchases[purchaseIdx].quantity;
+    const newTotal = Number(info.subTotal - (price * quantity))
     dispatch(updateSubTotal(newTotal))
     dispatch(delPurchase(purchaseIdx))
   }
 }
 export const fetchPurchases = function () {
   return function thunk (dispatch)  {
-    dispatch(getPurchases(initialState.purchases))
+    dispatch(getPurchases(store.getState().purchases))
   }
 }
 
