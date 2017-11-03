@@ -26,7 +26,7 @@ export class UserPortal extends Component {
         <h3>{this.props.user.name}'s Orders</h3>
           <ul className = "orders-list">
             {
-            orders.map((order, index) =>
+            orders.sort((a, b) => a.id - b.id).map((order, index) =>
               (<li key={order.id}>{'ORDER #: ' + order.id + ', STATUS: ' + order.status + ', DATE: ' + order.createdAt + ', SUBTOTAL: $' + order.subTotal}
               <ul>
                   {
