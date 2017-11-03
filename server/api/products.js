@@ -33,7 +33,7 @@ function fetchProductAndAddToRequest(req, res, next) {
   return Product.findById(req.params.productId)
     .then(product => {
       req.product = product
-      next()
+      return next()
     })
     .catch(next)
 }
@@ -48,6 +48,19 @@ router.get('/:productId/reviews', (req, res, next) => {
   req.product.getReviews()
   .then(reviews => res.json(reviews))
   .catch(next)
+})
+
+router.post('/:productId/reviews', (req, res, next) => {
+  //add middleware for being logged in
+  const {title, content, stars, productId} = req.body
+  const userId = req.user.id
+  const newReview = {
+    title, stars, content, userId, productId
+  }
+  req.product.createReview(newReview)
+  .then(() => {req.product.reload()})
+  .then(product => {res.json(product)})
+  .catch(err => console.error(err))
 })
 
 //This needs to talk to a thunk creator that will send back an array of objects containing purcahses, some form with categories

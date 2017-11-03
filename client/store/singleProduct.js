@@ -18,6 +18,19 @@ import axios from 'axios'
      .catch(err => console.error(err))
  };
 
+ export const postReview = (id, review) => (dispatch) => {
+   axios.post(`/api/products/${id}/reviews`, {
+     title: review.title,
+     content: review.content,
+     stars: review.stars,
+     productId: id,
+   })
+     .then(product => {
+      console.log('THIS IS THE PRODUCT', product)
+      dispatch(getProduct(product))})
+     .catch(err => console.error(err))
+ }
+
  export default function reducer(product = {}, action){
    switch (action.type){
     case GET_SINGLE_PRODUCT:

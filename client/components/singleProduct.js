@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import store from '../store'
-import { fetchSingleProduct } from '../store/singleProduct'
 import { Link } from 'react-router-dom'
 
 const SingleProduct = (props) => {
@@ -29,8 +27,6 @@ const SingleProduct = (props) => {
         <ul>
           <li>${product.price}</li>
           <li>{product.description}</li>
-          {/*<li>{product.reviews}</li>*/}
-
         </ul>
         <ul>
           CATEGORIES:
@@ -40,7 +36,7 @@ const SingleProduct = (props) => {
         </ul>
         <ul>
           REVIEWS: <br />
-          <Link to="/new-review">
+          <Link to={`/${product.id}/new-review`}>
           <button className="add-review-btn" > Post a review </button>
           </Link>
           {
