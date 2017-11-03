@@ -59,14 +59,14 @@ export class Admin extends Component {
     const currentUser = this.props.user;
 
     return (
-      <div>
+      <div className="admin-container">
         <div>
           <h1>Welcome, Admin {currentUser.name || currentUser.email}!</h1>
         </div>
-      <h3>Orders:</h3>
+      <h2>Orders:</h2>
       {
         orders.sort((a, b) => a.id - b.id).map((order, index) =>
-          (<div key={order.id}>
+          (<div className="admin-orders" key={order.id}>
             <div>Order #{order.id}
               <div>Date Created: {order.createdAt.slice(5, 7)}-{order.createdAt.slice(8, 10)}-{order.createdAt.slice(0, 4)} | Customer Contact: {order.email} | Subtotal: ${order.subTotal}</div>
               <div>
@@ -89,10 +89,10 @@ export class Admin extends Component {
           </div>)
         )
       }
-      <h3>Users:</h3>
+      <h2>Users:</h2>
       {
         users.sort((a, b) => a.id - b.id).map(user =>
-          (<div key={user.id}>
+          (<div className="admin-users" key={user.id}>
             <div>
               <div>{user.name} / {user.email}</div>
                 <div>
@@ -124,8 +124,8 @@ export class Admin extends Component {
           </div>)
         )
       }
-      <h3>Products:</h3>
-        <div>
+      <h2>Products:</h2>
+        <div className="new-product-form">
             <h3>Create New Product: </h3>
             <form onSubmit={this.handleProductSubmit}>
               <label>Title: </label>
@@ -147,9 +147,9 @@ export class Admin extends Component {
           </div>
       {
         products.sort((a, b) => a.id - b.id).map(product =>
-          (<ul key={product.id}>
-            <li><NavLink to={`/products/${product.id}`}>#{product.id} {product.title}</NavLink></li>
-          </ul>)
+          (<div className="admin-products" key={product.id}>
+            <NavLink to={`/products/${product.id}`}>#{product.id} {product.title}</NavLink>
+           </div>)
         )
       }
       </div>
