@@ -10,7 +10,7 @@ export class Admin extends Component {
     super()
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    //this.handleProductSubmit = this.handleProductSubmit.bind(this);
+    this.handleProductSubmit = this.handleProductSubmit.bind(this);
   }
 
   componentDidMount () {
@@ -37,18 +37,18 @@ export class Admin extends Component {
   }
 
 
-  // handleProductSubmit(evt) {
-  //   let newProduct = {
-  //     title: evt.target.title.value,
-  //     description: evt.target.desc.value,
-  //     photos: evt.target.photos.value.split(', '),
-  //     categories: evt.target.categories.value.split(', '),
-  //     price: evt.target.price.value,
-  //     quantity: evt.target.quantity.value,
-  //     available: evt.target.avail.value
-  //   }
-  //   this.props.createProduct(newProduct);
-  // }
+  handleProductSubmit(evt) {
+    let newProduct = {
+      title: evt.target.title.value,
+      description: evt.target.desc.value,
+      photos: evt.target.photos.value.split(', '),
+      categories: evt.target.categories.value.split(', '),
+      price: evt.target.price.value,
+      quantity: evt.target.quantity.value,
+      available: evt.target.avail.value
+    }
+    this.props.createProduct(newProduct);
+  }
 
 
 
