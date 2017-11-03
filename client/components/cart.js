@@ -20,7 +20,9 @@ export class Cart extends Component{
   }
   qtyChange(evt)  {
     evt.preventDefault();
+    if (evt.target.value)  {
     this.props.editPurchase(evt.target.name, evt.target.value)
+    }
   }
   render () {
     let cart = [];
@@ -52,8 +54,8 @@ export class Cart extends Component{
                             X
                             </button>
                         </td>
-                        {/* <td> <img src={purchase.photo} />
-                        </td> */}
+                        <td> <img src={purchase.photo} />
+                        </td>
                         <td> {purchase.title}
                         </td>
                         <td>
