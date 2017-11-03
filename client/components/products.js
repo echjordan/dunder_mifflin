@@ -6,12 +6,24 @@ import {Link} from 'react-router-dom'
 const Products = (props) => {
     const products = props.products
     const handleClick = props.handleClick
-
+    const user = props.user
+    console.log('USER: ', user)
     return (
       <div className = "product-container">
         <ul className = "product-list">
+        <div className = "greeting">
         {
-          products.map(product =>
+          user.id
+        ? <div>{
+          user.name
+          ? <div>Welcome, {user.name}!</div>
+          : <div>Welcome, {user.email}!</div>
+        }</div>
+        :
+        <div>Welcome!</div>
+      }
+      </div>
+        {products.map(product =>
             (<li key={product.id}>
                 <div className="product-name">
                 <Link to={`products/${product.id}`}> { product.title } </Link>
@@ -33,7 +45,7 @@ const Products = (props) => {
     )
 }
 
-const mapStateToProps = ({products}) => ({products})
+const mapStateToProps = ({products, user}) => ({products, user})
 
 const mapDispatchToProps = (dispatch) => {
   return {
