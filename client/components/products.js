@@ -22,7 +22,7 @@ const Products = (props) => {
         <div>Welcome!</div>
       }
       </div>
-        {products.map(product =>
+        {products.sort((a, b) => a.id - b.id).map(product =>
             (<li key={product.id}>
                 <div className="product-name">
                 <Link to={`products/${product.id}`}> { product.title } </Link>

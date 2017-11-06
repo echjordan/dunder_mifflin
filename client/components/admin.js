@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom'
 import { fetchAllUsers, updateUser, deleteUser } from '../store/users'
 import { fetchAllOrders, updateOrder } from '../store/orders'
 import { createProduct } from '../store/products'
+import { FormControlLabel, FormGroup } from 'material-ui/Form';
+import Switch from 'material-ui/Switch';
 
 export class Admin extends Component {
   constructor() {
@@ -96,15 +98,17 @@ export class Admin extends Component {
             <div>
               <div>{user.name} / {user.email}</div>
                 <div>
-                  <form onSubmit={this.handleSubmit}>
-                    <label>
-                      Admin Status:
-                      <input
-                        name="isAdmin"
-                        type="checkbox"
-                        defaultChecked={user.admin}
-                        onChange={this.handleInputChange.bind(this, user.id)} />
-                    </label>
+                <FormGroup onSubmit={this.handleSubmit}>
+        <FormControlLabel
+          control={
+            <Switch
+              defaultChecked={user.admin}
+              onChange={this.handleInputChange.bind(this, user.id)}
+            />
+          }
+          label="Admin Status"
+        />
+        </FormGroup>
                     <label>
                       Password Reset:
                       <input
@@ -112,7 +116,7 @@ export class Admin extends Component {
                         type="checkbox"
                         value={false} />
                     </label>
-                  </form>
+
                 </div>
                 <div>
                 <button
