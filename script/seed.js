@@ -221,7 +221,7 @@ async function seed () {
     }),
     Product.create({
       title: 'Paper Weight',
-      description:	'May require two people to lift.Shipping is extra.',
+      description:	'May require two people to lift. Shipping is extra.',
       photos:	['https://i.imgur.com/7WHa7W2.png', 'https://i.imgur.com/rlLzmcF.jpg'],
       price:	45.00,
       quantity:	100,

@@ -12,5 +12,5 @@ export {default as ReviewForm} from './review-form'
 export {default as Cart} from './cart'
 export {default as Admin} from './admin'
 export {default as Checkout} from './checkout'
-
+export {default as FilterableProducts} from './filterableProducts'
 export {Login, Signup} from './auth-form'

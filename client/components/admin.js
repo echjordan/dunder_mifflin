@@ -36,7 +36,6 @@ export class Admin extends Component {
     this.props.updateUser(id, updatedUser)
   }
 
-
   handleProductSubmit(evt) {
     let newProduct = {
       title: evt.target.title.value,
@@ -49,8 +48,6 @@ export class Admin extends Component {
     }
     this.props.createProduct(newProduct);
   }
-
-
 
   render() {
     const users = this.props.users;
