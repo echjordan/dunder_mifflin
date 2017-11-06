@@ -2,13 +2,15 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {pushPurchase} from '../store'
 import {Link} from 'react-router-dom'
+import { GridList, GridTile } from 'material-ui/GridList';
+
 
 const Products = (props) => {
     const products = props.products
     const handleClick = props.handleClick
     const user = props.user
     return (
-      <div className = "product-container">
+      <div className = "product-container" >
         <ul className = "product-list">
         <div className = "greeting">
         {
@@ -22,24 +24,25 @@ const Products = (props) => {
         <div>Welcome!</div>
       }
       </div>
+        <GridList
+          cellHeight={180}
+          style={styles.gridList}
+        >
         {products.map(product =>
-            (<li key={product.id}>
-                <div className="product-name">
+            (<GridTile
+                key={product.id}
+                title={product.title}
+                subtitle={product.description}
+              >
                 <Link to={`products/${product.id}`}> { product.title } </Link>
-                </div>
-                <div className="product-description">
-                 {product.description}
-                </div>
-                <div className="product-photos">
                  <img className="product-photos-1" src={product.photos[0]} /> <img className="product-photos-2" src={product.photos[1]} />
-                </div>
                 <button className="products-add" onClick={handleClick} value={product.id} >
                 +
                 </button>
-            </li>)
+            </GridTile>)
           )
         }
-        </ul>
+        </GridList>
       </div>
     )
 }
