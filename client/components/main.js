@@ -15,8 +15,9 @@ const Main = (props) => {
 
   return (
     <div>
-    <h3>Dunder Mifflin Inc.</h3>
       <nav>
+      <div className="nav-wrapper">
+        <a href="/" className="brand-logo">Dunder Mifflin Inc.</a>
         {
           isLoggedIn
             ? <div>
@@ -34,6 +35,7 @@ const Main = (props) => {
               <Link to="/cart">Cart</Link>
             </div>
         }
+      </div>
       </nav>
       <hr />
       {children}
