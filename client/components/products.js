@@ -23,7 +23,7 @@ const Products = (props) => {
           }
         <div className="row">
           {
-            products.map(product =>
+            products.sort((a, b) => a.id - b.id).map(product =>
               (
                 <div className="col s12 m4" key={product.id}>
                   <div className="card small" >
