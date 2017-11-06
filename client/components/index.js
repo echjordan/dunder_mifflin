@@ -4,11 +4,13 @@
  * having to figure out which file they belong to!
  */
 export {default as Main} from './main'
-export {default as UserHome} from './user-home'
+// export {default as UserHome} from './user-home'
 export {default as UserPortal} from './userPortal'
 export {default as Products} from './products'
 export {default as SingleProduct} from './singleProduct'
 export {default as ReviewForm} from './review-form'
 export {default as Cart} from './cart'
 export {default as Admin} from './admin'
+export {default as Checkout} from './checkout'
+
 export {Login, Signup} from './auth-form'

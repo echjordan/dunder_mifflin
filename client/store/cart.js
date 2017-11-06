@@ -12,6 +12,7 @@ const UPDATE_SUBTOTAL = 'UPDATE_SUBTOTAL';
 const PUT_PURCHASE = 'PUT_PURCHASE';
 const DEL_PURCHASE = 'DEL_PURCHASE';
 const GET_PURCHASES = 'GET_PURCHASES';
+const EMPTY_CART = 'EMPTY_CART'
 
 
 //Action Creators
@@ -21,17 +22,27 @@ const updateSubTotal = (subTotal) => ({type: UPDATE_SUBTOTAL, subTotal})
 const putPurchase = (cartIdx, quantity) => ({type: PUT_PURCHASE, cartIdx, quantity});
 const delPurchase = (cartIdx) => ({type: DEL_PURCHASE, cartIdx})
 const getPurchases = (purchases) => ({type: GET_PURCHASES, purchases});
+const emptyCart = () => ({type: EMPTY_CART})
 
 //Thunks
-export const postProducts = function (info) {
+export const postPurchase = function (info) {
   return function thunk (dispatch) {
-    axios.post('/orders', {
-      eamil: info.email,
+    let state = store.getState().cart;
+    let paid = state.purchases.map(item => {
+      return {
+        productId: item.id,
+        quantity: item.quantity,
+        price: item.price
+      }
+    })
+    axios.post('/api/orders', {
+      email: info.email,
       address: info.address,
-      subTotal: store.getState().subTotal,
-      purchases: store.getState().purchases,
+      subTotal: state.subTotal,
+      purchases: paid
     })
     .then(order => dispatch(submitPurchases(order)))
+    .then(() => dispatch(emptyCart()))
     .catch(err => console.log(err))
   }
 }
@@ -41,12 +52,12 @@ export const pushPurchase = function (productId) {
     .then(res => res.data)
     .then(product => {
         let purchase = {};
+        purchase.id = product.id;
         purchase.photo = product.photos[0];
         purchase.title = product.title;
         purchase.quantity = 1;
         purchase.price = product.price;
-      const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price)
-
+      const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price);
       dispatch(addPurchase(purchase))
       dispatch(updateSubTotal(newTotal))
     })
@@ -56,7 +67,15 @@ export const pushPurchase = function (productId) {
 
 export const editPurchase = function (purchaseIdx, newQuantity)  {
   return function thunk (dispatch)  {
+    let info = store.getState().cart;
+    const price = info.purchases[purchaseIdx].price;
+    const quantity = info.purchases[purchaseIdx].quantity;
+    const oldSubTotal = info.subTotal;
+    const oldPurchaseTotal = Number(price * quantity);
+    const newPurchaseTotal = Number(price * newQuantity);
+    const newTotal = oldSubTotal - oldPurchaseTotal + newPurchaseTotal;
     dispatch(putPurchase(purchaseIdx, Number(newQuantity)))
+    dispatch(updateSubTotal(Number(newTotal)))
   }
 }
 export const destroyPurchase = function (purchaseIdx) {
@@ -64,7 +83,7 @@ export const destroyPurchase = function (purchaseIdx) {
     let info = store.getState().cart;
     const price = info.purchases[purchaseIdx].price;
     const quantity = info.purchases[purchaseIdx].quantity;
-    const newTotal = Number(info.subTotal - (price * quantity))
+    const newTotal = Number(info.subTotal - (price * quantity));
     dispatch(updateSubTotal(newTotal))
     dispatch(delPurchase(purchaseIdx))
   }
@@ -99,6 +118,11 @@ export default function (state = initialState, action) {
       })
     case GET_PURCHASES:
       return state;
+    case EMPTY_CART:
+      return Object.assign({
+        purchases: [],
+        subTotal: 0.00
+      })
     default:
       return state
   }

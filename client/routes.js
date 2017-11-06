@@ -4,8 +4,9 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, UserHome, Products, Admin, UserPortal, Cart, SingleProduct, ReviewForm} from './components'
+import { Main, Login, Signup, Products, Admin, UserPortal, Checkout, Cart, SingleProduct, ReviewForm} from './components'
 import {me, fetchProducts} from './store'
+
 
 /**
  * COMPONENT
@@ -27,15 +28,17 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Products} />
-            {/*<Route exact path="/products/:productId" component={SingleProduct} />*/}
+            <Route exact path="/products/:productId" component={SingleProduct} />
             <Route path="/new-review" component={ReviewForm} />
             <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
             {
               isLoggedIn &&
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
+                  {/*<Route path="/" component={UserHome} />*/}
                   <Route path="/userportal" component={UserPortal} />
+                  <Route path="/:productId/new-review" component={ReviewForm} />
                   {
                     isAdmin &&
                     <Route path="/admin" component={Admin} />

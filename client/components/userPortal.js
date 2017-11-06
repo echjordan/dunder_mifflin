@@ -20,10 +20,17 @@ export class UserPortal extends Component {
   render(){
     const orders = this.props.userportal;
     const purchases = orders.purchases;
+    const user = this.props.user;
   return (
       <div>
         <div className = "orders-container">
-        <h3>{this.props.user.name}'s Orders</h3>
+        <div className = "greeting">
+        {
+          user.name
+          ? <div>{user.name}'s Previous Orders</div>
+          : <div>{user.email}'s Previous Orders</div>
+        }
+        </div>
           <ul className = "orders-list">
             {
             orders.sort((a, b) => a.id - b.id).map((order, index) =>

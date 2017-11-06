@@ -10,7 +10,7 @@ import userportal from './userPortal'
 import users from './users'
 import orders from './orders'
 
-const reducer = combineReducers({ user, products, users, orders, userportal, singleProduct,cart})
+const reducer = combineReducers({ user, products, users, orders, userportal, singleProduct, cart})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
