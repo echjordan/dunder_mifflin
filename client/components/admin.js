@@ -6,6 +6,7 @@ import { fetchAllOrders, updateOrder } from '../store/orders'
 import { createProduct } from '../store/products'
 import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import Switch from 'material-ui/Switch';
+import Card from 'material-ui/Card';
 
 export class Admin extends Component {
   constructor() {
@@ -68,7 +69,7 @@ export class Admin extends Component {
       <h2>Orders:</h2>
       {
         orders.sort((a, b) => a.id - b.id).map((order, index) =>
-          (<div className="admin-orders" key={order.id}>
+          (<Card key={order.id}><div className="admin-orders">
             <div>Order #{order.id}
               <div>Date Created: {order.createdAt.slice(5, 7)}-{order.createdAt.slice(8, 10)}-{order.createdAt.slice(0, 4)} | Customer Contact: {order.email} | Subtotal: ${order.subTotal}</div>
               <div>
@@ -88,13 +89,13 @@ export class Admin extends Component {
                     orders[index].purchases.map((purchase, index2) =>
                     (<li key={purchase.id}><NavLink to={`/products/${orders[index].purchases[index2].product.id}`}>{'ITEM: ' + orders[index].purchases[index2].product.title + ', QUANTITY: '  + orders[index].purchases[index2].quantity}</NavLink></li>))
                     }</div>
-          </div>)
+          </div></Card>)
         )
       }
       <h2>Users:</h2>
       {
         users.sort((a, b) => a.id - b.id).map(user =>
-          (<div className="admin-users" key={user.id}>
+          (<Card key={user.id}><div className="admin-users">
             <div>
               <div>{user.name} / {user.email}</div>
                 <div>
@@ -125,7 +126,7 @@ export class Admin extends Component {
                 </button>
              </div>
             </div>
-          </div>)
+          </div></Card>)
         )
       }
       <h2>Products:</h2>
