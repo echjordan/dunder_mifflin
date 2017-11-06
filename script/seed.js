@@ -24,7 +24,7 @@ async function seed () {
     User.create({name: 'Jen', email: 'jen@email.com', password: '123', admin: false}),
     User.create({name: 'Melissa', email: 'melissa@email.com', password: '123', admin: false}),
     User.create({name: 'Doug', email: 'doug@email.com', password: '123', admin: false}),
-    User.create({name: 'John', email: 'john@email.com', password: '123', admin: false})
+    User.create({email: 'john@email.com', password: '123', admin: false})
   ])
 
   const categories = await Promise.all([
