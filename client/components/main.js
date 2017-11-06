@@ -16,28 +16,29 @@ const Main = (props) => {
   return (
     <div>
       <nav>
-      <div className="nav-wrapper">
-        <a href="/" className="brand-logo">Dunder Mifflin Inc.</a>
+      <div className="#3949ab indigo darken-1 nav-wrapper">
+        <a href="/" className="brand-logo padding">Dunder Mifflin Inc.</a>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
         {
           isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <Link to="/">Shop</Link>
-              <Link to="/userportal">My Account</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
-              <Link to="/cart">Cart</Link>
+              <li><Link to="/">Shop</Link></li>
+              <li><Link to="/userportal">My Account</Link></li>
+              <li><a href="#" onClick={handleClick}>Logout</a></li>
+              <li><Link to="/cart">Cart</Link></li>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
-              <Link to="/">Shop</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/cart">Cart</Link>
+              <li><Link to="/">Shop</Link></li>
+              <li><Link to="/login">Login</Link></li>
+              <li><Link to="/signup">Sign Up</Link></li>
+              <li><Link to="/cart">Cart</Link></li>
             </div>
         }
+        </ul>
       </div>
       </nav>
-      <hr />
       {children}
     </div>
   )
