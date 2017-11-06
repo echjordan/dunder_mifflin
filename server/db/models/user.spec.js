@@ -32,4 +32,42 @@ describe('User model', () => {
       })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
+
+  describe('checking the schema', () => {
+    describe('fields', () => {
+      let cody
+
+      beforeEach(() => {
+        return User.create({
+          email: 'cody@puppybook.com',
+          name: 'Cody',
+          admin: true,
+          password: 'bones'
+        })
+          .then(user => {
+            cody = user
+          })
+      })
+
+      it('includes `email` field', () => {
+        expect(cody.email).to.equal('cody@puppybook.com')
+      })
+
+      it('includes `name` field', () => {
+        expect(cody.name).to.equal('Cody')
+      })
+
+      it('includes `admin` field', () => {
+        expect(cody.admin).to.equal(true)
+      })
+
+      it('`admin` field is a boolean', () => {
+        expect(typeof cody.admin).to.equal('boolean')
+      })
+
+      it('includes `password` field', () => {
+        expect(typeof cody.password).to.equal('string')
+      })
+    }) // end describe('correctPassword')
+  }) // end describe('instanceMethods')
 }) // end describe('User model')
