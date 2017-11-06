@@ -54,10 +54,15 @@ export class Cart extends Component{
                             X
                             </button>
                         </td>
+<<<<<<< HEAD
                         <td> <img
                             className = "cart-photo"
                             src={purchase.photo} />
                         </td>
+=======
+                        { <td> <img src={purchase.photo} />
+                        </td> }
+>>>>>>> origin/master
                         <td> {purchase.title}
                         </td>
                         <td>

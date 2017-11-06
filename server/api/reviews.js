@@ -17,10 +17,10 @@ router.get('/:reviewId', (req, res, next) => {
 })
 
 
-router.post('/', (req, res, next) => {
-  Review.create(req.body)
-  .then(() => res.sendStatus(200))
-  .catch(next)
-})
+// router.post('/', (req, res, next) => {
+//   Review.create(req.body)
+//   .then(() => res.sendStatus(200))
+//   .catch(next)
+// })
 
 module.exports = router;
