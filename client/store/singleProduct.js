@@ -26,7 +26,6 @@ import axios from 'axios'
      productId: id,
    })
      .then(product => {
-      console.log('THIS IS THE PRODUCT', product)
       dispatch(getProduct(product))})
      .catch(err => console.error(err))
  }

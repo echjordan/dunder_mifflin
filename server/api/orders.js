@@ -11,11 +11,12 @@ router.get('/', (req, res, next) => {
 
 //This needs to talk to a thunk creator that will send back an array of objects containing purcahses
 router.post('/', (req, res, next) => {
+  // const userId = req.user.id
   Order.create(
     {
       email: req.body.email,
       address: req.body.address,
-      userId: req.user.id,
+      // userId: userId,
       subTotal: req.body.subTotal,
       status: 'Processing'
     })
