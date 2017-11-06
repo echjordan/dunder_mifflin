@@ -7,7 +7,6 @@ const Products = (props) => {
     const products = props.products
     const handleClick = props.handleClick
     const user = props.user
-    console.log('USER: ', user)
     return (
       <div className = "product-container">
         <ul className = "product-list">
