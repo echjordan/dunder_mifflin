@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {pushPurchase} from '../store'
 
 const SingleProduct = (props) => {
-    const products = props.products
+    const {products, handleClick} = props
     const product = products.find(prod => {
       return prod.id === Number(props.match.params.productId)
     })
@@ -28,6 +29,9 @@ const SingleProduct = (props) => {
           <li>${product.price}</li>
           <li>{product.description}</li>
         </ul>
+        <button className="products-add" onClick={handleClick} value={product.id} >
+          +
+                </button>
         <ul>
           CATEGORIES:
           {
@@ -49,4 +53,13 @@ const SingleProduct = (props) => {
 
 const mapState = ({products}) => ({products})
 
-export default connect(mapState)(SingleProduct)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleClick(evt) {
+      evt.preventDefault()
+      dispatch(pushPurchase(evt.target.value))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(SingleProduct)
