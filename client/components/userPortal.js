@@ -33,7 +33,7 @@ export class UserPortal extends Component {
         </div>
           <ul className = "orders-list">
             {
-            orders.map((order, index) =>
+            orders.sort((a, b) => a.id - b.id).map((order, index) =>
               (<li key={order.id}>{'ORDER #: ' + order.id + ', STATUS: ' + order.status + ', DATE: ' + order.createdAt + ', SUBTOTAL: $' + order.subTotal}
               <ul>
                   {
