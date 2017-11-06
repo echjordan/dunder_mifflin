@@ -54,7 +54,9 @@ export class Cart extends Component{
                             X
                             </button>
                         </td>
-                        <td> <img src={purchase.photo} />
+                        <td> <img
+                            className = "cart-photo"
+                            src={purchase.photo} />
                         </td>
                         <td> {purchase.title}
                         </td>

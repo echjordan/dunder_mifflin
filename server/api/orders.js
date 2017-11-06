@@ -15,7 +15,7 @@ router.post('/', (req, res, next) => {
     {
       email: req.body.email,
       address: req.body.address,
-      userId: req.body.userId,
+      userId: req.user.id,
       subTotal: req.body.subTotal,
       status: 'Processing'
     })

@@ -31,9 +31,37 @@ export class Checkout extends Component{
       cart = this.props.cart.purchases
     }
     return (
-      <div>
-        Checkout
-        <div> Information
+      <div id="checkout">
+               <h2> Checkout </h2>
+          <hr />
+        <div id="order-field">
+          <h4> Your Order </h4>
+        <table>
+          <thead>
+              <tr>
+              <th>Quantity</th>
+              <th>Name</th>
+              <th>Price</th>
+              </tr>
+          </thead>
+              <tbody>
+              {
+                  cart.map(purchase => (
+                    <tr key={purchase.title}>
+                        <td>{purchase.quantity}x</td>
+                        <td> {purchase.title}</td>
+                        <td> ${purchase.price}</td>
+                    </tr>
+                  ))
+              }
+              </tbody>
+        </table>
+          <div>Total:
+            <span>  ${this.props.cart.subTotal}.00</span>
+          </div>
+        </div>
+        <div id="info-field">
+          <h3> Information </h3>
           <form onSubmit={this.submitHandler}>
               <label> Email:
                   <input
@@ -42,10 +70,11 @@ export class Checkout extends Component{
               <label> Address:
                   <input
                     name="address1" />
+                    <br />
                   <input
                     name="address2" />
               </label>
-          Payment Method
+          <h3> Payment Method </h3>
             <label> Card Type:
                 <select
                   name="cardType">
@@ -89,31 +118,6 @@ export class Checkout extends Component{
             <button>Purchase</button>
           </form>
         </div>
-        <div> Your Order
-        <table>
-          <thead>
-              <tr>
-              <th>Name</th>
-              <th>quantity</th>
-              <th>price</th>
-              </tr>
-          </thead>
-              <tbody>
-              {
-                  cart.map(purchase => (
-                    <tr key={purchase.title}>
-                        <td>{purchase.quantity}x</td>
-                        <td> {purchase.title}</td>
-                        <td> ${purchase.price}</td>
-                    </tr>
-                  ))
-              }
-              </tbody>
-          </table>
-          <div>Total:
-            <span> ${this.props.cart.subTotal}</span>
-            </div>
-          </div>
       </div>
     )
   }
