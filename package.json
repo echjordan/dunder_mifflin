@@ -1,9 +1,9 @@
 {
-  "name": "boilermaker",
+  "name": "dunder_mifflin",
   "version": "1.0.0",
   "description": "Some boilerplate code to get you started - get shakin'!",
   "engines": {
-    "node": ">= 7.0.0"
+    "node": "^8.0.0"
   },
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-plugin-transform-es2015-typeof-symbol": "^6.23.0",
     "body-parser": "^1.16.1",
     "chai-things": "^0.2.0",
     "compression": "^1.7.1",
@@ -29,7 +30,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
-    "material-ui": "^0.19.4",
+    "material-ui": "^1.0.0-beta.20",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
@@ -50,12 +51,13 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
     "babel-core": "^6.22.1",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^8.0.2",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.24.1",
+    "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
     "enzyme": "^3.0.0",

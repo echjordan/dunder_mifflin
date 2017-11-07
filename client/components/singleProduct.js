@@ -1,52 +1,98 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import {pushPurchase} from '../store'
 
 const SingleProduct = (props) => {
-    const products = props.products
+
+    const {products, handleClick, isAdmin} = props
     const product = products.find(prod => {
       return prod.id === Number(props.match.params.productId)
     })
     const produceStars = (numStars) => {
       let stars = ''
+
       for (let i = 0; i < numStars; i++) {
         stars += '⭐️ '
       }
       return stars
     }
-
     return (
-      <div>
-        <h1>{product.title}</h1>
-        <div className="product-image-container">
-        <img className="product-images-1" src={product.photos[0]} />
-        </div>
-        <div className="product-image-container">
-        <img className="product-images-2" src={product.photos[1]} />
-        </div>
-        <ul>
-          <li>${product.price}</li>
-          <li>{product.description}</li>
-        </ul>
-        <ul>
-          CATEGORIES:
+    <div className="product-container">
+      <div className="card">
           {
-            product.categories.map(category => <li key={category.id}>{category.name}</li>)
+            isAdmin &&
+            <Link to={`/${product.id}/edit-product`}>
+            <a className="btn-floating btn-large red">
+              <i className="large material-icons">mode_edit</i>
+            </a>
+            </Link>
           }
-        </ul>
-        <ul>
-          REVIEWS: <br />
+        <div className="card-content">
+          <h3>{product.title}</h3>
+          <div className="row">
+          <img src={product.photos[0]} />
+          <img src={product.photos[1]} />
+          </div>
+          <div className="buy">
+          <h3>${product.price}</h3>
+          <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} name={product.id}>+</a>
+          </div>
+        </div>
+        <div className="card-tabs">
+          <ul className="tabs tabs-fixed-width">
+            <li className="tab"><a className="active" href="#description">
+              Description
+            </a></li>
+            <li className="tab"><a href="#reviews">
+               Reviews
+            </a></li>
+          </ul>
+        </div>
+        <div className="card-content grey lighten-4">
+          <div id="description">
+            {product.description}
+            <br />
+            { product.categories.map(category => (
+              <div key={category.id} className="chip">
+                {category.name}
+              </div>
+              )
+            )}
+          </div>
+          <div id="reviews">
+          {
+            product.reviews.map(review => (<li key={review.id}>
+              {review.title}, {review.content} STARS: {produceStars(review.stars)}
+              </li>))
+            }
+          <br />
+          <br />
+
           <Link to={`/${product.id}/new-review`}>
-          <button className="add-review-btn" > Post a review </button>
+            <a className="waves-effect waves-light btn">Add a review</a>
           </Link>
-          {
-            product.reviews.map(review => <li key={review.id}>{review.title}, {review.content}  STARS: {produceStars(review.stars)}</li>)
-          }
-        </ul>
+          </div>
+        </div>
       </div>
+    </div>
     )
 }
 
-const mapState = ({products}) => ({products})
+const mapState = (state) => {
+  return {
+    products: state.products,
+    isAdmin: state.user.admin
+  }
+}
 
-export default connect(mapState)(SingleProduct)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleClick(evt) {
+      evt.preventDefault()
+      dispatch(pushPurchase(evt.target.name))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(SingleProduct)

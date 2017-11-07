@@ -6,76 +6,89 @@ import {logout} from '../store'
 //import AppBar from 'material-ui/AppBar';
 
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, isAdmin} = props
-
-//   return (
-//     <div>
-//       <AppBar
-//         title="Dunder Mifflin Inc."
-//         iconClassNameRight="muidocs-icon-navigation-expand-more"
-//         >
-//         <ul id="nav-mobile" className="right hide-on-med-and-down">
-//         {
-//           isLoggedIn
-//             ? <div>
-//             {
-//               isAdmin &&
-//               <Link to="/admin">Admin </Link>
-//             }
-//               {/* The navbar will show these links after you log in */}
-//               <Link to="/">Shop </Link>
-//               <Link to="/userportal">My Account </Link>
-//               <a href="#" onClick={handleClick}>Logout </a>
-//               <Link to="/cart">Cart</Link>
-//             </div>
-//             : <div>
-//               {/* The navbar will show these links before you log in */}
-//               <Link to="/">Shop </Link>
-//               <Link to="/login">Login </Link>
-//               <Link to="/signup">Sign Up </Link>
-//               <Link to="/cart">Cart</Link>
-//             </div>
-//         }
-//         </ul>
-//         </AppBar>
-//       {children}
-//     </div>
-//   )
-// }
+  const {children, handleClick, isLoggedIn, isAdmin, items} = props
 
 return (
   <div>
-    <nav>
-    <div className="#3949ab indigo darken-1 nav-wrapper">
-      <a href="/" className="brand-logo padding">Dunder Mifflin Inc.</a>
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-      {
-        isLoggedIn
-          ? <div>
-          {
-            isAdmin &&
-            <li><Link to="/admin">Admin</Link></li>
-          }
-            {/* The navbar will show these links after you log in */}
-            <li><Link to="/">Shop</Link></li>
-            <li><Link to="/userportal">My Account</Link></li>
-            <li><a href="#" onClick={handleClick}>Logout</a></li>
-            <li><Link to="/cart">Cart</Link></li>
-          </div>
-          : <div>
-            {/* The navbar will show these links before you log in */}
-            <li><Link to="/">Shop</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
-          </div>
-      }
-      </ul>
+    <div className="navbar-fixed">
+      <nav>
+        <div className="nav-wrapper #3949ab indigo darken-1">
+        <Link to="/" className="brand-logo padding">Dunder Mifflin Inc.</Link>
+        <Link to="/" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></Link>
+        <ul className="right hide-on-med-and-down">
+        {
+          isLoggedIn
+            ? <div>
+            {
+              isAdmin &&
+              <li className="active"><Link to="/admin">Admin</Link></li>
+            }
+              {/* The navbar will show these links after you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/userportal">My Account</Link></li>
+              <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+              <li><a><span className="new badge counter">{items.length}</span></a></li>
+            </div>
+            : <div>
+              {/* The navbar will show these links before you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/login">Login</Link></li>
+              <li className="active"><Link to="/signup">Sign Up</Link></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+              <li><a><span className="new badge counter">{items.length}</span></a></li>
+            </div>
+        }
+        </ul>
+        </div>
+        </nav>
+      </div>
+        <ul className="side-nav" id="mobile-demo">
+        {
+          isLoggedIn
+            ? <div>
+            {
+              isAdmin &&
+              <li className="active"><Link to="/admin">Admin</Link></li>
+            }
+              {/* The navbar will show these links after you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/userportal">My Account</Link></li>
+              <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart></i></Link></li>
+            </div>
+            : <div>
+              {/* The navbar will show these links before you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/login">Login</Link></li>
+              <li className="active"><Link to="/signup">Sign Up</Link></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            </div>
+        }
+        </ul>
+
+      {children}
+
+      <footer className="footer #cfd8dc blue-grey lighten-4 valign-wrapper justify-between">
+      <div className="social">
+        <div className="category">
+          <Link to="https://www.facebook.com/" target="_blank"><img src="social-fb.png" /></Link>
+        </div>
+        <div className="category">
+          <Link to="https://www.instagram.com/" target="_blank"><img src="social-insta.png" /></Link>
+        </div>
+        <div className="category">
+          <Link to="https://www.twitter.com/" target="_blank"><img src="social-twit.png" /></Link>
+        </div>
+      </div>
+        <div className="category">
+            <h6 className=" white-text">
+              Layla Hedges, Evlis Henry, Emily Jordan, April Rueb
+            </h6>
+        </div>
+      </footer>
     </div>
-    </nav>
-    {children}
-  </div>
-)
+  )
 }
 
 /**
@@ -84,7 +97,8 @@ return (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.admin
+    isAdmin: state.user.admin,
+    items: state.cart.purchases
   }
 }
 

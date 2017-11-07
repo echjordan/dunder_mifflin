@@ -119,14 +119,14 @@ async function seed () {
     Product.create({
       title: 'Graph Paper',
       description:	'What are you, a nerdy software engineer?',
-      photos: ['https://i.imgur.com/VQSYwH9.jpg','https://i.imgur.com/ECQ97DF.jpg'],
+      photos: ['https://i.imgur.com/VQSYwH9.jpg', 'https://i.imgur.com/ECQ97DF.jpg'],
       price:	25.00,
       quantity:	100,
       available:	true
     }),
     Product.create({
       title: 'Handmade Paper',
-      description: 'This one- of - a - kind artisan paper is delicately crafted by Brooklyn hipsters.',
+      description: 'This one-of-a-kind artisan paper is delicately crafted by Brooklyn hipsters.',
       photos:	['https://i.imgur.com/UqiasWq.jpg', 'https://i.imgur.com/E9pxFte.jpg'],
       price:	300.00,
       quantity:	100,
@@ -134,7 +134,7 @@ async function seed () {
     }),
     Product.create({
       title: 'Huge Paper',
-      description: 'This paper is huge.HUGE.Warning: May make small hands appear even smaller.',
+      description: 'This paper is huge. HUGE. Warning: May make small hands appear even smaller.',
       photos:	['https://i.imgur.com/N8EODil.jpg', 'https://i.imgur.com/zY6heIE.jpg'],
       price:	500.00,
       quantity:	75,
@@ -221,7 +221,7 @@ async function seed () {
     }),
     Product.create({
       title: 'Paper Weight',
-      description:	'May require two people to lift.Shipping is extra.',
+      description:	'May require two people to lift. Shipping is extra.',
       photos:	['https://i.imgur.com/7WHa7W2.png', 'https://i.imgur.com/rlLzmcF.jpg'],
       price:	45.00,
       quantity:	100,
