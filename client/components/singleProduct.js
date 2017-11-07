@@ -26,7 +26,7 @@ const SingleProduct = (props) => {
           </div>
           <div className="buy">
           <h3>${product.price}</h3>
-          <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} value={product.id}><i className="material-icons">+</i></a>
+          <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} name={product.id}>+</a>
           </div>
         </div>
         <div className="card-tabs">
@@ -74,7 +74,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleClick(evt) {
       evt.preventDefault()
-      dispatch(pushPurchase(evt.target.value))
+      dispatch(pushPurchase(evt.target.name))
     }
   }
 }
