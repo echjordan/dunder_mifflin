@@ -47,7 +47,7 @@ export class Admin extends Component {
       categories: evt.target.categories.value.split(', '),
       price: evt.target.price.value,
       quantity: evt.target.quantity.value,
-      available: evt.target.avail.value
+      available: true
     }
     this.props.createProduct(newProduct);
   }
@@ -58,21 +58,28 @@ export class Admin extends Component {
     const products = this.props.products;
     const currentUser = this.props.user;
 
+    const style = {
+      padding: '1em',
+      flex: '1 1 auto'
+    }
+
     return (
-      <div className="admin-container">
+            <div>
         <div>
-          <h1>Welcome, Admin {currentUser.name || currentUser.email}!</h1>
+          <h2>Welcome, Admin {currentUser.name || currentUser.email}!</h2>
         </div>
-      <h2>Orders:</h2>
+      <div className="admin-container">
+        <Card style={style}>
+      <h3>Orders:</h3>
       {
         orders.sort((a, b) => a.id - b.id).map((order, index) =>
-          (<Card key={order.id}><div className="admin-orders">
+          (<div className="admin-orders" key={order.id}>
             <div>Order #{order.id}
               <div>Date Created: {order.createdAt.slice(5, 7)}-{order.createdAt.slice(8, 10)}-{order.createdAt.slice(0, 4)} | Customer Contact: {order.email} | Subtotal: ${order.subTotal}</div>
               <div>
                   <form>
                       <label>Status: </label>
-                        <select defaultValue={order.status} onChange={this.handleChange.bind(this, order.id)}>
+                        <select className="browser-default" onChange={this.handleChange.bind(this, order.id)} defaultValue={order.status}>
                           <option value="created">Created</option>
                           <option value="processing">Processing</option>
                           <option value="cancelled">Cancelled</option>
@@ -86,15 +93,18 @@ export class Admin extends Component {
                     orders[index].purchases.map((purchase, index2) =>
                     (<li key={purchase.id}><NavLink to={`/products/${orders[index].purchases[index2].product.id}`}>{'ITEM: ' + orders[index].purchases[index2].product.title + ', QUANTITY: '  + orders[index].purchases[index2].quantity}</NavLink></li>))
                     }</div>
-          </div></Card>)
+                    <hr />
+          </div>)
         )
       }
-      <h2>Users:</h2>
+      </Card>
+      <Card style={style}>
+      <h3>Users:</h3>
       {
         users.sort((a, b) => a.id - b.id).map(user =>
-          (<Card key={user.id}><div className="admin-users">
+          (<div key={user.id} className="admin-users">
             <div>
-              <div>{user.name} / {user.email}</div>
+              <div>{user.name ? user.name + ', ' + user.email : user.email}</div>
                 <div>
                 <FormGroup onSubmit={this.handleSubmit}>
         <FormControlLabel
@@ -107,29 +117,27 @@ export class Admin extends Component {
           label="Admin Status"
         />
         </FormGroup>
-                    <label>
-                      Password Reset:
-                      <input
-                        name="passwordReset"
-                        type="checkbox"
-                        value={false} />
-                    </label>
 
                 </div>
                 <div>
                 <button
                   onClick={() => this.props.deleteUser(user.id)}
-                  className="btn btn-default">X
+                  className="btn btn-default">Delete User
                 </button>
              </div>
             </div>
-          </div></Card>)
+             <hr/>
+          </div>
+         )
         )
       }
-      <h2>Products:</h2>
+      </Card>
+      </div>
+      <div className="admin-container">
+      <Card style={style}>
         <div className="new-product-form">
             <h3>Create New Product: </h3>
-            <form onSubmit={this.handleProductSubmit}>
+            <form className="browser-default" onSubmit={this.handleProductSubmit}>
               <label>Title: </label>
                 <input type="text" id="title" />
               <label>Description: </label>
@@ -142,11 +150,12 @@ export class Admin extends Component {
                 <input type="text" id="categories" />
               <label>Quantity: </label>
                 <input type="number" id="quantity" />
-              <label>Availability: </label>
-                <input type="checkbox" id="avail" />
               <input type="submit" value="Submit" />
             </form>
           </div>
+          </Card>
+        <Card style={style}>
+        <h3>All Products</h3>
       {
         products.sort((a, b) => a.id - b.id).map(product =>
           (<div className="admin-products" key={product.id}>
@@ -154,6 +163,8 @@ export class Admin extends Component {
            </div>)
         )
       }
+      </Card>
+      </div>
       </div>
     )
   }
