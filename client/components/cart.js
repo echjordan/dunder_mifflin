@@ -34,7 +34,7 @@ export class Cart extends Component{
     }
     return (
       <div id="cart-page">
-        <h2>ShoppingCart</h2>
+        <h2>Shopping Cart</h2>
         <div>
         <table>
           <thead>

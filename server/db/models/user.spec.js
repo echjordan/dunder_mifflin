@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const {expect} = require('chai')
 const db = require('../index')
 const User = db.model('user')
@@ -27,9 +25,66 @@ describe('User model', () => {
         expect(cody.correctPassword('bones')).to.be.equal(true)
       })
 
-      it('returns false if the password is incorrect', () => {
-        expect(cody.correctPassword('bonez')).to.be.equal(false)
+       it('returns false if the password is incorrect', () => {
+         expect(cody.correctPassword('bonez')).to.be.equal(false)
+       })
+    })
+  })
+
+  describe('checking the schema', () => {
+    describe('fields', () => {
+      let cody
+
+      beforeEach(() => {
+        return User.create({
+          email: 'cody@puppybook.com',
+          name: 'Cody',
+          admin: true,
+          password: 'bones'
+        })
+          .then(user => {
+            cody = user
+          })
       })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+
+      it('includes `email` field', () => {
+        expect(cody.email).to.equal('cody@puppybook.com')
+      })
+
+      it('includes `name` field', () => {
+        expect(cody.name).to.equal('Cody')
+      })
+
+      it('includes `admin` field', () => {
+        expect(cody.admin).to.equal(true)
+      })
+
+      it('`admin` field is a boolean', () => {
+        expect(cody.admin).to.be.a('boolean')
+      })
+
+      it('includes `password` field', () => {
+        expect(cody.password).to.be.a('string')
+      })
+    })
+  })
+
+  describe('validations', function () {
+    it('errors without an email', function() {
+      const user = User.build({
+          name: 'Cody',
+          email: '',
+      });
+
+      return user.save()
+        .then(function () {
+          throw Error('User.save() shoud have failed with a validation error');
+        }, function (err) {
+          const [first] = err.errors
+          expect(first).to.have.property('path', 'email');
+          expect(first).to.have.property('type', 'Validation error');
+          expect(first.message).to.contain('email');
+        })
+      })
+    })
+  })
