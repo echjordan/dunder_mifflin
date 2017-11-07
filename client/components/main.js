@@ -45,37 +45,77 @@ const Main = (props) => {
 
 return (
   <div>
-    <nav>
-    <div className="#3949ab indigo darken-1 nav-wrapper">
-      <Link to="/" className="brand-logo padding">Dunder Mifflin Inc.</Link>
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-      {
-        isLoggedIn
-          ? <div>
-          {
-            isAdmin &&
-            <li><Link to="/admin">Admin</Link></li>
-          }
-            {/* The navbar will show these links after you log in */}
-            <li><Link to="/">Shop</Link></li>
-            <li><Link to="/userportal">My Account</Link></li>
-            <li><a href="#" onClick={handleClick}>Logout</a></li>
-            <li><Link to="/cart">Cart</Link></li>
-          </div>
-          : <div>
-            {/* The navbar will show these links before you log in */}
-            <li><Link to="/">Shop</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
-            <li><Link to="/cart">Cart</Link></li>
-          </div>
-      }
-      </ul>
-    </div>
+    <div className="navbar-fixed">
+      <nav>
+        <div className="nav-wrapper #3949ab indigo darken-1">
+        <Link to="/" className="brand-logo padding">Dunder Mifflin Inc.</Link>
+        <Link to="/" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></Link>
+        <ul className="right hide-on-med-and-down">
+        {
+          isLoggedIn
+            ? <div>
+            {
+              isAdmin &&
+              <li className="active"><Link to="/admin">Admin</Link></li>
+            }
+              {/* The navbar will show these links after you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/userportal">My Account</Link></li>
+              <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            </div>
+            : <div>
+              {/* The navbar will show these links before you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/login">Login</Link></li>
+              <li className="active"><Link to="/signup">Sign Up</Link></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            </div>
+        }
+        </ul>
+      </div>
     </nav>
-    {children}
-  </div>
-)
+
+
+        <ul className="side-nav" id="mobile-demo">
+        {
+          isLoggedIn
+            ? <div>
+            {
+              isAdmin &&
+              <li className="active"><Link to="/admin">Admin</Link></li>
+            }
+              {/* The navbar will show these links after you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/userportal">My Account</Link></li>
+              <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            </div>
+            : <div>
+              {/* The navbar will show these links before you log in */}
+              <li className="active"><Link to="/">Shop</Link></li>
+              <li className="active"><Link to="/login">Login</Link></li>
+              <li className="active"><Link to="/signup">Sign Up</Link></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+            </div>
+        }
+        </ul>
+      </div>
+      {children}
+
+      <footer className="footer #bdbdbd grey lighten-1">
+        <div align="center" className="category">
+          <Link to="https://www.facebook.com/" target="_blank"><img src="social-fb.png" /></Link>
+        </div>
+        <div align="center" className="category">
+          <Link to="https://www.instagram.com/" target="_blank"><img src="social-insta.png" /></Link>
+        </div>
+        <div align="center" className="category">
+          <Link to="https://www.twitter.com/" target="_blank"><img src="social-twit.png" /></Link>
+        </div>
+      </footer>
+    </div>
+  )
 }
 
 /**
