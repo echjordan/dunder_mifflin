@@ -56,6 +56,7 @@ export const pushPurchase = function (productId) {
         purchase.title = product.title;
         purchase.quantity = 1;
         purchase.price = product.price;
+        purchase.availability = product.quantity;
       const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price);
       dispatch(addPurchase(purchase))
       dispatch(updateSubTotal(newTotal))
@@ -73,6 +74,10 @@ export const editPurchase = function (purchaseIdx, newQuantity)  {
     const oldPurchaseTotal = Number(price * quantity);
     const newPurchaseTotal = Number(price * newQuantity);
     const newTotal = oldSubTotal - oldPurchaseTotal + newPurchaseTotal;
+    const amountAvailable = info.purchases[purchaseIdx].availability;
+    if (newQuantity > amountAvailable)  {
+      newQuantity = Number(amountAvailable);
+    }
     dispatch(putPurchase(purchaseIdx, Number(newQuantity)))
     dispatch(updateSubTotal(Number(newTotal)))
   }

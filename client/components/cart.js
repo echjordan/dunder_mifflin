@@ -20,9 +20,12 @@ export class Cart extends Component{
   }
   qtyChange(evt)  {
     evt.preventDefault();
-    if (evt.target.value)  {
+    let value;
+    if (evt.target.value)  {value = 0;}
+    else {value = evt.target.value }
     this.props.editPurchase(evt.target.name, evt.target.value)
-    }
+
+
   }
   render () {
     let cart = [];

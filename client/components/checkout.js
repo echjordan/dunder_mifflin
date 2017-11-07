@@ -52,6 +52,7 @@ export class Checkout extends Component{
               <tbody>
               {
                   cart.map(purchase => (
+                    purchase.quantity > 0 &&
                     <tr key={purchase.title}>
                         <td>{purchase.quantity}x</td>
                         <td> {purchase.title}</td>
