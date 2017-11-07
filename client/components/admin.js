@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom'
 import { fetchAllUsers, updateUser, deleteUser } from '../store/users'
 import { fetchAllOrders, updateOrder } from '../store/orders'
 import { createProduct } from '../store/products'
-// import { FormControlLabel, FormGroup } from 'material-ui/Form';
-// import Switch from 'material-ui/Switch';
-// import Card from 'material-ui/Card';
+import { FormControlLabel, FormGroup } from 'material-ui/Form';
+import Switch from 'material-ui/Switch';
+import Card from 'material-ui/Card';
 
 export class Admin extends Component {
   constructor() {
@@ -39,7 +39,6 @@ export class Admin extends Component {
     this.props.updateUser(id, updatedUser)
   }
 
-
   handleProductSubmit(evt) {
     let newProduct = {
       title: evt.target.title.value,
@@ -52,8 +51,6 @@ export class Admin extends Component {
     }
     this.props.createProduct(newProduct);
   }
-
-
 
   render() {
     const users = this.props.users;

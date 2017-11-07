@@ -14,7 +14,6 @@ const DEL_PURCHASE = 'DEL_PURCHASE';
 const GET_PURCHASES = 'GET_PURCHASES';
 const EMPTY_CART = 'EMPTY_CART'
 
-
 //Action Creators
 const submitPurchases = (order) => ({type: SUBMIT_PURCHASES, order})
 const addPurchase = (purchase) => ({type: ADD_PURCHASE, purchase});
