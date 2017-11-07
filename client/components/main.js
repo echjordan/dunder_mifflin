@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
+//import AppBar from 'material-ui/AppBar';
 
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, isAdmin,items} = props
+  const {children, handleClick, isLoggedIn, isAdmin, items} = props
+
 return (
   <div>
     <div className="navbar-fixed">
