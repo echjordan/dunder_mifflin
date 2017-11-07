@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 
 
 const Products = (props) => {
-    console.log('THIS IS A LOG')
     const products = props.products
     const handleClick = props.handleClick
     const user = props.user

@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { postReview } from '../store'
+import { changeProduct } from '../store'
 
-$(document).ready(function () {
-  Materialize.updateTextFields();
-});
+// $(document).ready(function () {
+//   Materialize.updateTextFields();
+// });
 
 
 const ProductForm = (props) => {
@@ -13,37 +13,37 @@ const ProductForm = (props) => {
   const product = products.find(prod => {
     return prod.id === Number(props.match.params.productId)
   })
+  const pId = Number(props.match.params.productId)
   return (
     //ADD ON CHANGE HANDLERS
-    <form onSubmit={handleSubmit}>
-      <div className="input-field">
+    <form onSubmit={handleSubmit.bind(this, pId)}>
         Product Name:
-        <input type="text" id="name" value={product.title} className="validate" />
-      </div>
+        <input type="text" id="name" defaultValue={product.title} className="validate" />
       <br />
-      <div className="input-field">
-        Product Description:
-        <input type="text" id="description" value={product.description} className="validate" />
-      </div>
+      Product Description:
+      <input type="text" id="description" defaultValue={product.description} className="validate" />
       <br />
 
         Price:
-        <input type="text" id="price" value={product.price} className="validate" />
+        <input type="text" id="price" defaultValue={product.price} className="validate" />
         <br />
         Photos:
-        <input type="text" id="photos" value={product.photos} className="validate" />
+        <input type="text" id="photos" defaultValue={product.photos[0] + ", " + product.photos[1]} className="validate" />
         <br />
 
         Quantity:
-        <input type="text" id="quantity" value={product.quantity} className="validate" />
+        <input type="text" id="quantity" defaultValue={product.quantity} className="validate" />
         <br />
-        Availability:
-        <select id="availability" value={product.avaialability}>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
+        Categories:
+        <input type="text" id="categories" defaultValue={product.categories[0]} className="validate" />
         <br />
+       Availability:
+        <select className="browser-default" id="availability" defaultValue={product.avaialability}>
+         <option value="true">Yes</option>
+         <option value="false">No</option>
+       </select>
         <button type="submit" >Update product</button>
+        <br />
     </form>
   )
 }
@@ -53,15 +53,16 @@ const mapState = ({products}) => ({products})
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(pId, evt){
-      evt.preventDafult()
-      dispatch(postReview(pId,
+      evt.preventDefault()
+      dispatch(changeProduct(pId,
       {
         title: evt.target.name.value,
         description: evt.target.description.value,
-        price: evt.target.price.value,
-        photos: evt.target.photos.value,
-        quantity: evt.target.quantity.value,
-        avaialability: evt.target.avaialability.value
+        price: Number(evt.target.price.value),
+        photos: evt.target.photos.value.split(', '),
+        quantity: Number(evt.target.quantity.value),
+        available: !!evt.target.availability.value,
+        categories: evt.target.categories.value
       }))
     }
   }

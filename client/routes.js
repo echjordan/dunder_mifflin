@@ -33,7 +33,6 @@ class Routes extends Component {
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/admin" component={Admin} />
-            <Route path="/search" component={FilterableProducts} />
             {
               isLoggedIn &&
                 <Switch>
