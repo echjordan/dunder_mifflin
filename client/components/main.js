@@ -103,7 +103,7 @@ return (
       </div>
       {children}
 
-      <footer className="footer #bdbdbd grey lighten-1">
+      <footer className="footer #cfd8dc blue-grey lighten-4">
         <div align="center" className="category">
           <Link to="https://www.facebook.com/" target="_blank"><img src="social-fb.png" /></Link>
         </div>
