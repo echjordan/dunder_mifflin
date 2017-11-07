@@ -33,12 +33,12 @@ export class Cart extends Component{
       cart = this.props.cart.purchases
     }
     return (
-      <div>
-        ShoppingCart
+      <div id="cart-page">
+        <h2>ShoppingCart</h2>
         <div>
         <table>
           <thead>
-              <tr>
+              <tr className = "#3949ab indigo darken-1">
               <th>X</th>
               <th>Image</th>
               <th>Name</th>
@@ -50,7 +50,8 @@ export class Cart extends Component{
               {
                   cart.map((purchase, idx) => (
                     <tr key={purchase.title}>
-                        <td> <button
+                        <td > <button
+                            className="waves-effect waves-light btn"
                             key={purchase.productId}
                             value = {idx}
                             onClick = {this.deleteClick}>
@@ -75,10 +76,10 @@ export class Cart extends Component{
               }
               </tbody>
           </table>
-          <div>Total:
-            <span> {this.props.cart.subTotal}</span>
+          <div className = "#3949ab indigo darken-1"><h5>Total:
+            <span> ${this.props.cart.subTotal}.00</span></h5>
             </div>
-            <button>
+            <button className="waves-effect waves-light btn-flat">
           <NavLink to="/checkout" >Checkout </NavLink></button>
         </div>
       </div>
