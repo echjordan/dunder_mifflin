@@ -1,5 +1,3 @@
-/* global describe beforeEach it */
-
 const {expect} = require('chai')
 const db = require('../index')
 const User = db.model('user')
@@ -30,8 +28,8 @@ describe('User model', () => {
       it('returns false if the password is incorrect', () => {
         expect(cody.correctPassword('bonez')).to.be.equal(false)
       })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
+    })
+  })
 
   describe('checking the schema', () => {
     describe('fields', () => {
@@ -62,12 +60,31 @@ describe('User model', () => {
       })
 
       it('`admin` field is a boolean', () => {
-        expect(typeof cody.admin).to.equal('boolean')
+        expect(cody.admin).to.be.a('boolean')
       })
 
       it('includes `password` field', () => {
-        expect(typeof cody.password).to.equal('string')
+        expect(cody.password).to.be.a('string')
       })
-    }) // end describe('correctPassword')
-  }) // end describe('instanceMethods')
-}) // end describe('User model')
+    })
+  })
+
+  describe('validations', function () {
+    it('errors without an email', function() {
+      const user = User.build({
+          name: 'Cody',
+          email: '',
+      });
+
+      return user.save()
+        .then(function () {
+          throw Error('User.save() shoud have failed with a validation error');
+        }, function (err) {
+          const [first] = err.errors
+          expect(first).to.have.property('path', 'email');
+          expect(first).to.have.property('type', 'Validation error');
+          expect(first.message).to.contain('email');
+        })
+      })
+    })
+  })
