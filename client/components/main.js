@@ -5,8 +5,7 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn, isAdmin} = props
-
+  const {children, handleClick, isLoggedIn, isAdmin,items} = props
 return (
   <div>
     <div className="navbar-fixed">
@@ -34,6 +33,7 @@ return (
               <li className="active"><Link to="/login">Login</Link></li>
               <li className="active"><Link to="/signup">Sign Up</Link></li>
               <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+              <li><a><span className="new badge counter">{items.length}</span></a></li>
             </div>
         }
         </ul>
@@ -50,7 +50,7 @@ return (
               <li className="active"><Link to="/">Shop</Link></li>
               <li className="active"><Link to="/userportal">My Account</Link></li>
               <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
-              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+              <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart></i></Link></li>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -94,7 +94,8 @@ return (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: state.user.admin
+    isAdmin: state.user.admin,
+    items: state.cart.purchases
   }
 }
 
