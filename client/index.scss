@@ -82,3 +82,10 @@ body {
 .buy > *{
   display: inline;
 }
+
+.admin-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
