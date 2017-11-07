@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchPurchases, postPurchase} from '../store/cart.js'
+import {fetchPurchases, postPurchase} from '../store/cart.js';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
 
 export class Checkout extends Component{
   constructor(props)  {
@@ -12,9 +21,6 @@ export class Checkout extends Component{
     this.props.fetchPurchases();
   }
   componentDidMount() {
-    $(document).ready(function() {
-      $('select').material_select();
-    });
   }
   submitHandler(evt)  {
     evt.preventDefault();
@@ -41,26 +47,36 @@ export class Checkout extends Component{
           <hr />
         <div id="order-field">
           <h4> Your Order </h4>
-        <table>
-          <thead>
-              <tr>
-              <th>Quantity</th>
-              <th>Name</th>
-              <th>Price</th>
-              </tr>
-          </thead>
-              <tbody>
+        <Table
+        selectable={false}
+        >
+          <TableHeader
+          adjustForCheckbox={false}
+          displaySelectAll={false}
+            enableSelectAll={false}
+          >
+              <TableRow>
+              <TableHeaderColumn>Quantity</TableHeaderColumn>
+              <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn>Price</TableHeaderColumn>
+              </TableRow>
+          </TableHeader>
+              <TableBody
+              displayRowCheckbox={false}
+            showRowHover={true}
+            stripedRows={false}
+              >
               {
                   cart.map(purchase => (
-                    <tr key={purchase.title}>
-                        <td>{purchase.quantity}x</td>
-                        <td> {purchase.title}</td>
-                        <td> ${purchase.price}</td>
-                    </tr>
+                    <TableRow key={purchase.title}>
+                        <TableRowColumn>{purchase.quantity}x</TableRowColumn>
+                        <TableRowColumn> {purchase.title}</TableRowColumn>
+                        <TableRowColumn> ${purchase.price}</TableRowColumn>
+                    </TableRow>
                   ))
               }
-              </tbody>
-        </table>
+              </TableBody>
+        </Table>
           <div>Total:
             <span>  ${this.props.cart.subTotal}.00</span>
           </div>
@@ -68,17 +84,16 @@ export class Checkout extends Component{
         <div id="info-field">
           <h3> Information </h3>
           <form onSubmit={this.submitHandler}>
-              <label> Email:
-                  <input
+                  <TextField
+                    floatingLabelText="Email:"
                     name="email" />
-              </label>
-              <label> Address:
-                  <input
+                  <TextField
+                    floatingLabelText="Address:"
+                    multiLine={true}
+                    rows={2}
+                    rowsMax={4}
                     name="address1" />
                     <br />
-                  <input
-                    name="address2" />
-              </label>
           <h3> Payment Method </h3>
             <label> Card Type:
                 <select
