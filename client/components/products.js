@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {pushPurchase} from '../store'
 import {Link} from 'react-router-dom'
 
+
 const Products = (props) => {
     const products = props.products
     const handleClick = props.handleClick
@@ -38,7 +39,7 @@ const Products = (props) => {
                       <p>{product.description}</p>
                     </div>
                     <div className="card-action">
-                      <a className="black-text" href="#" onClick={handleClick} value={product.id}>Add to cart</a>
+                      <a className="black-text" name={product.id} href="#" onClick={handleClick} value={product.id}>Add to cart</a>
                     </div>
                   </div>
                 </div>
@@ -55,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleClick(evt){
       evt.preventDefault()
-      dispatch(pushPurchase(evt.target.value))
+      dispatch(pushPurchase(evt.target.name))
     }
   }
 }

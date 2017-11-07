@@ -15,55 +15,56 @@ const SingleProduct = (props) => {
       }
       return stars
     }
-
     return (
 
       <div className="card">
         <div className="card-content">
-          <h1>{product.title}</h1>
-          <div className="product-image-container">
-            <img className="product-images-1" src={product.photos[0]} />
+          <h3>{product.title}</h3>
+          <div className="row">
+          <img src={product.photos[0]} />
+          <img src={product.photos[1]} />
           </div>
-          <div className="product-image-container">
-            <img className="product-images-2" src={product.photos[1]} />
-          </div>
-          <p>${product.price}</p>
+          <div className="buy">
+          <h3>${product.price}</h3>
           <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} value={product.id}><i className="material-icons">+</i></a>
+          </div>
         </div>
         <div className="card-tabs">
           <ul className="tabs tabs-fixed-width">
-            <li className="tab"><a href="#test4">
+            <li className="tab"><a className="active" href="#description">
               Description
             </a></li>
-            <li className="tab"><a className="active" href="#test5">Test 2</a></li>
-            <li className="tab"><a href="#test6">Test 3</a></li>
+            <li className="tab"><a href="#reviews">
+               Reviews
+            </a></li>
           </ul>
         </div>
         <div className="card-content grey lighten-4">
-          <div id="test4">
+          <div id="description">
             {product.description}
-            Categories:
-            {
-            product.categories.map(category => <li key={category.id}>{category.name}</li>)
-          }
+            <br />
+            { product.categories.map(category => (
+              <div key={category.id} className="chip">
+                {category.name}
+              </div>
+              )
+            )}
           </div>
-          <div id="test6">Test 3</div>
+          <div id="reviews">
+          {
+            product.reviews.map(review => (<li key={review.id}>
+              {review.title}, {review.content} STARS: {produceStars(review.stars)}
+              </li>))
+            }
+          <br />
+          <br />
+
+          <Link to={`/${product.id}/new-review`}>
+            <a className="waves-effect waves-light btn">Add a review</a>
+          </Link>
+          </div>
         </div>
       </div>
-        // <ul>
-        //   CATEGORIES:
-        //
-        // </ul>
-        // <ul>
-        //   REVIEWS: <br />
-        //   <Link to={`/${product.id}/new-review`}>
-        //   <button className="add-review-btn" > Post a review </button>
-        //   </Link>
-        //   {
-        //     product.reviews.map(review => <li key={review.id}>{review.title}, {review.content}  STARS: {produceStars(review.stars)}</li>)
-        //   }
-        // </ul>
-
     )
 }
 
