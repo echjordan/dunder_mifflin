@@ -26,6 +26,7 @@ return (
               <li className="active"><Link to="/userportal">My Account</Link></li>
               <li className="active"><a href="#" onClick={handleClick}>Logout</a></li>
               <li className="active"><Link to="/cart"><i className="material-icons">shopping_cart</i></Link></li>
+              <li><a><span className="new badge counter">{items.length}</span></a></li>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
