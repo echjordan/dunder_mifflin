@@ -4,20 +4,30 @@ import { Link } from 'react-router-dom'
 import {pushPurchase} from '../store'
 
 const SingleProduct = (props) => {
-    const {products, handleClick} = props
+
+    const {products, handleClick, isAdmin} = props
     const product = products.find(prod => {
       return prod.id === Number(props.match.params.productId)
     })
     const produceStars = (numStars) => {
       let stars = ''
+
       for (let i = 0; i < numStars; i++) {
         stars += '⭐️ '
       }
       return stars
     }
     return (
-
+    <div className="product-container">
       <div className="card">
+          {
+            isAdmin &&
+            <Link to={`/${product.id}/edit-product`}>
+            <a className="btn-floating btn-large red">
+              <i className="large material-icons">mode_edit</i>
+            </a>
+            </Link>
+          }
         <div className="card-content">
           <h3>{product.title}</h3>
           <div className="row">
@@ -65,10 +75,16 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
+    </div>
     )
 }
 
-const mapState = ({products}) => ({products})
+const mapState = (state) => {
+  return {
+    products: state.products,
+    isAdmin: state.user.admin
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {

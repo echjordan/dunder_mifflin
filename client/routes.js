@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import { Main, Login, Signup, Products, Admin, UserPortal, Checkout, Cart, SingleProduct, ReviewForm} from './components'
+import { Main, Login, Signup, Products, Admin, UserPortal, Checkout, Cart, SingleProduct, ReviewForm, FilterableProducts, FilterInput, ProductForm} from './components'
 import {me, fetchProducts} from './store'
 
 
@@ -42,7 +42,12 @@ class Routes extends Component {
                   <Route path="/:productId/new-review" component={ReviewForm} />
                   {
                     isAdmin &&
+                  <Switch>
+
                     <Route path="/admin" component={Admin} />
+                    <Route exact path="/:productId/edit-product" component={ProductForm} />
+                  </Switch>
+
                   }
                 </Switch>
             }
