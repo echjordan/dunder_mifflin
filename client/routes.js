@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import { Main, Login, Signup, Products, Admin, UserPortal, Checkout, Cart, SingleProduct, ReviewForm, FilterableProducts, FilterInput, ProductForm} from './components'
@@ -25,6 +25,7 @@ class Routes extends Component {
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route path="/github" component={() => window.location = 'https://github.com/echjordan/dunder_mifflin'} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/" component={Products} />
@@ -32,7 +33,6 @@ class Routes extends Component {
             <Route path="/new-review" component={ReviewForm} />
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
-            <Route path="/admin" component={Admin} />
             {
               isLoggedIn &&
                 <Switch>
