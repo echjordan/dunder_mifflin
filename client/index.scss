@@ -58,27 +58,47 @@ body {
   margin: 0px 0px 0px 20px;
 }
 
+.row {
+  width: 100%;
+}
+
+.row > img {
+  display: inline;
+}
+
+.buy > * {
+  display: inline;
+}
+
 .footer {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  text-align: center;
 }
 
 .category {
-  position: relative;
   display: inline-block;
   margin: 8px 15px 8px 15px;
 }
-.row{
-  width: 100%;
+
+.justify-between {
+  justify-content: space-between;
 }
 
-.row > img{
-  display: inline;
+.social {
+  min-width: 186px;
 }
 
-.buy > *{
-  display: inline;
+@media screen and (max-width: 515px) {
+  nav .brand-logo {
+    font-size: 1.5rem;
+  }
+}
+
+.admin-container {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

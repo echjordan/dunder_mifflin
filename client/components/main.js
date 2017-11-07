@@ -3,45 +3,9 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
-//import AppBar from 'material-ui/AppBar';
 
 const Main = (props) => {
   const {children, handleClick, isLoggedIn, isAdmin} = props
-
-//   return (
-//     <div>
-//       <AppBar
-//         title="Dunder Mifflin Inc."
-//         iconClassNameRight="muidocs-icon-navigation-expand-more"
-//         >
-//         <ul id="nav-mobile" className="right hide-on-med-and-down">
-//         {
-//           isLoggedIn
-//             ? <div>
-//             {
-//               isAdmin &&
-//               <Link to="/admin">Admin </Link>
-//             }
-//               {/* The navbar will show these links after you log in */}
-//               <Link to="/">Shop </Link>
-//               <Link to="/userportal">My Account </Link>
-//               <a href="#" onClick={handleClick}>Logout </a>
-//               <Link to="/cart">Cart</Link>
-//             </div>
-//             : <div>
-//               {/* The navbar will show these links before you log in */}
-//               <Link to="/">Shop </Link>
-//               <Link to="/login">Login </Link>
-//               <Link to="/signup">Sign Up </Link>
-//               <Link to="/cart">Cart</Link>
-//             </div>
-//         }
-//         </ul>
-//         </AppBar>
-//       {children}
-//     </div>
-//   )
-// }
 
 return (
   <div>
@@ -73,9 +37,6 @@ return (
             </div>
         }
         </ul>
-      </div>
-    </nav>
-
 
         <ul className="side-nav" id="mobile-demo">
         {
@@ -100,18 +61,27 @@ return (
             </div>
         }
         </ul>
+        </div>
+        </nav>
       </div>
       {children}
 
-      <footer className="footer #cfd8dc blue-grey lighten-4">
-        <div align="center" className="category">
+      <footer className="footer #cfd8dc blue-grey lighten-4 valign-wrapper justify-between">
+      <div className="social">
+        <div className="category">
           <Link to="https://www.facebook.com/" target="_blank"><img src="social-fb.png" /></Link>
         </div>
-        <div align="center" className="category">
+        <div className="category">
           <Link to="https://www.instagram.com/" target="_blank"><img src="social-insta.png" /></Link>
         </div>
-        <div align="center" className="category">
+        <div className="category">
           <Link to="https://www.twitter.com/" target="_blank"><img src="social-twit.png" /></Link>
+        </div>
+      </div>
+        <div className="category">
+            <h6 className=" white-text">
+              Layla Hedges, Evlis Henry, Emily Jordan, April Rueb
+            </h6>
         </div>
       </footer>
     </div>
