@@ -29,27 +29,19 @@ body {
   width: 50px;
 }
 
-//Checkout Page
-#checkout {
-
-}
-
-#order-field {
-
-}
-
-#info-field {
-
-}
-
 .product-photos-1{
   height: 10%;
-  width:10%
+  width:10%;
+  opacity: 0.4
+
 }
 
 .product-photos-2{
   height: 10%;
-  width: 10%
+  width: 10%;
+    opacity: 0.4
+
+
 }
 
 .product-images-2{
@@ -78,4 +70,15 @@ body {
   position: relative;
   display: inline-block;
   margin: 8px 15px 8px 15px;
+}
+.row{
+  width: 100%;
+}
+
+.row > img{
+  display: inline;
+}
+
+.buy > *{
+  display: inline;
 }

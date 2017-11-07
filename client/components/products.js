@@ -3,43 +3,49 @@ import { connect } from 'react-redux'
 import {pushPurchase} from '../store'
 import {Link} from 'react-router-dom'
 
+
 const Products = (props) => {
     const products = props.products
     const handleClick = props.handleClick
     const user = props.user
     return (
-      <div className = "product-container">
-        <ul className = "product-list">
-        <div className = "greeting">
-        {
-          user.id
-        ? <div>{
-          user.name
-          ? <div>Welcome, {user.name}!</div>
-          : <div>Welcome, {user.email}!</div>
-        }</div>
-        :
-        <div>Welcome!</div>
-      }
-      </div>
-        {products.map(product =>
-            (<li key={product.id}>
-                <div className="product-name">
-                <Link to={`products/${product.id}`}> { product.title } </Link>
+      <div className="product-container">
+          {
+            user.id
+              ? <div>
+                {
+                  user.name
+                    ? <div>Welcome, {user.name}!</div>
+                    : <div>Welcome, {user.email}!</div>
+                }
+              </div>
+              :
+              <div>Welcome!</div>
+          }
+        <div className="row">
+          {
+            products.sort((a, b) => a.id - b.id).map(product =>
+              (
+                <div className="col s12 m4" key={product.id}>
+                  <div className="card small" >
+                    <div className="card-image">
+                      <img className="product-photos-1" src={product.photos[0]} />
+                    <div className="card-title ">
+                        <Link className="black-text bold" to={`products/${product.id}`}> {product.title} </Link>
+                    </div>
+                    </div>
+                    {/*<img className="product-photos-2" src={product.photos[1]} />*/}
+                    <div className="card-content">
+                      <p>{product.description}</p>
+                    </div>
+                    <div className="card-action">
+                      <a className="black-text" name={product.id} href="#" onClick={handleClick} value={product.id}>Add to cart</a>
+                    </div>
+                  </div>
                 </div>
-                <div className="product-description">
-                 {product.description}
-                </div>
-                <div className="product-photos">
-                 <img className="product-photos-1" src={product.photos[0]} /> <img className="product-photos-2" src={product.photos[1]} />
-                </div>
-                <button className="products-add" onClick={handleClick} value={product.id} >
-                +
-                </button>
-            </li>)
-          )
-        }
-        </ul>
+              )
+            )}
+        </div>
       </div>
     )
 }
@@ -50,7 +56,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     handleClick(evt){
       evt.preventDefault()
-      dispatch(pushPurchase(evt.target.value))
+      dispatch(pushPurchase(evt.target.name))
     }
   }
 }

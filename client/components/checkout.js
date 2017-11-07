@@ -11,6 +11,11 @@ export class Checkout extends Component{
   componentWillMount()  {
     this.props.fetchPurchases();
   }
+  componentDidMount() {
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+  }
   submitHandler(evt)  {
     evt.preventDefault();
     let info = {
