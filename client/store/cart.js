@@ -12,7 +12,8 @@ const UPDATE_SUBTOTAL = 'UPDATE_SUBTOTAL';
 const PUT_PURCHASE = 'PUT_PURCHASE';
 const DEL_PURCHASE = 'DEL_PURCHASE';
 const GET_PURCHASES = 'GET_PURCHASES';
-const EMPTY_CART = 'EMPTY_CART'
+const EMPTY_CART = 'EMPTY_CART';
+const CALC_SUBTOTAL = 'CALC_SUBTOTAL';
 
 //Action Creators
 const submitPurchases = (order) => ({type: SUBMIT_PURCHASES, order})
@@ -47,21 +48,30 @@ export const postPurchase = function (info) {
 }
 export const pushPurchase = function (productId) {
   return function thunk (dispatch)  {
-    axios.get(`/api/products/${productId}`)
-    .then(res => res.data)
-    .then(product => {
-        let purchase = {};
-        purchase.id = product.id;
-        purchase.photo = product.photos[0];
-        purchase.title = product.title;
-        purchase.quantity = 1;
-        purchase.price = product.price;
-        purchase.availability = product.quantity;
-      const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price);
-      dispatch(addPurchase(purchase))
+    let bag = store.getState().cart.purchases;
+    let index = bag.findIndex(item => item.id == productId)
+    if (index != -1) {
+      bag[index].quantity += 1;
+      const newTotal = Number(bag[index].price * bag[index].quantity)
       dispatch(updateSubTotal(newTotal))
-    })
-    .catch(err => console.log(err))
+    }
+    else  {
+        axios.get(`/api/products/${productId}`)
+        .then(res => res.data)
+        .then(product => {
+            let purchase = {};
+            purchase.id = product.id;
+            purchase.photo = product.photos[0];
+            purchase.title = product.title;
+            purchase.quantity = 1;
+            purchase.price = product.price;
+            purchase.availability = product.quantity;
+          const newTotal = Number(store.getState().cart.subTotal) + Number(purchase.price);
+          dispatch(addPurchase(purchase))
+          dispatch(updateSubTotal(newTotal))
+        })
+        .catch(err => console.log(err))
+      }
   }
 }
 
@@ -107,6 +117,10 @@ export default function (state = initialState, action) {
       return Object.assign({}, state, {
         purchases: [...state.purchases, action.purchase]
       })
+    // case CALC_SUBTOTAL:
+    //   return action.purchases.reduce(item => {
+    //     return item.price * item.quantity
+    //   })
     case UPDATE_SUBTOTAL:
       return Object.assign({}, state, {
         subTotal: action.subTotal
