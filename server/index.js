@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV === 'development')
+  require('./require-check-case')
+
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')

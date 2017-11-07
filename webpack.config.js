@@ -1,4 +1,5 @@
 const LiveReloadPlugin = require('webpack-livereload-plugin')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -32,5 +33,8 @@ module.exports = {
   // When we're in development, we can use this handy live-reload plugin
   // to refresh the page for us every time we make a change to our client-side
   // files. It's like `nodemon` for the front end!
-  plugins: isDev ? [new LiveReloadPlugin({appendScriptTag: true})] : []
+  plugins: isDev ? [
+    new CaseSensitivePathsPlugin(),
+    new LiveReloadPlugin({appendScriptTag: true}),
+  ] : []
 }
