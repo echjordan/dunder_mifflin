@@ -40,12 +40,17 @@ body {
 
 .product-photos-1{
   height: 10%;
-  width:10%
+  width:10%;
+  opacity: 0.4
+
 }
 
 .product-photos-2{
   height: 10%;
-  width: 10%
+  width: 10%;
+    opacity: 0.4
+
+
 }
 
 .product-images-2{
@@ -62,7 +67,14 @@ body {
   margin: 0px 0px 0px 20px;
 }
 
-.products-card{
-  height: 50%;
-  width: 50%;
+.row{
+  width: 100%;
+}
+
+.row > img{
+  display: inline;
+}
+
+.buy > *{
+  display: inline;
 }
