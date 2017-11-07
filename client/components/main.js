@@ -37,7 +37,9 @@ return (
             </div>
         }
         </ul>
-
+        </div>
+        </nav>
+      </div>
         <ul className="side-nav" id="mobile-demo">
         {
           isLoggedIn
@@ -61,9 +63,7 @@ return (
             </div>
         }
         </ul>
-        </div>
-        </nav>
-      </div>
+
       {children}
 
       <footer className="footer #cfd8dc blue-grey lighten-4 valign-wrapper justify-between">
