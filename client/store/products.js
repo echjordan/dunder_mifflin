@@ -44,7 +44,6 @@ export const postReview = (id, review) => (dispatch) => {
 }
 
 export const changeProduct = (id, data) => (dispatch) => {
-  console.log('THIS IS THE DATA', data)
   axios.put(`/api/products/${id}`, data)
   .then(product => {
     dispatch(updateProduct(product))

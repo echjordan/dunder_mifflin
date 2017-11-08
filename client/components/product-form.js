@@ -2,11 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { changeProduct } from '../store'
 
-// $(document).ready(function () {
-//   Materialize.updateTextFields();
-// });
-
-
 const ProductForm = (props) => {
 
   const {products, handleSubmit} = props
@@ -15,7 +10,6 @@ const ProductForm = (props) => {
   })
   const pId = Number(props.match.params.productId)
   return (
-    //ADD ON CHANGE HANDLERS
     <form onSubmit={handleSubmit.bind(this, pId)}>
         Product Name:
         <input type="text" id="name" defaultValue={product.title} className="validate" />
@@ -30,17 +24,16 @@ const ProductForm = (props) => {
         Photos:
         <input type="text" id="photos" defaultValue={product.photos[0] + ", " + product.photos[1]} className="validate" />
         <br />
-
         Quantity:
         <input type="text" id="quantity" defaultValue={product.quantity} className="validate" />
         <br />
         Categories:
-        <input type="text" id="categories" defaultValue={product.categories[0]} className="validate" />
+        <input type="text" id="categories" placeholder= "Separated by commas" defaultValue={product.categories} className="validate" />
         <br />
-       Availability:
-        <select className="browser-default" id="availability" defaultValue={product.avaialability}>
-         <option value="true">Yes</option>
-         <option value="false">No</option>
+       Available:
+        <select className="browser-default" id="availability" defaultValue={product.availability}>
+         <option value="true" >Yes</option>
+         <option value="false" >No</option>
        </select>
         <button type="submit" >Update product</button>
         <br />
@@ -62,7 +55,7 @@ const mapDispatch = (dispatch) => {
         photos: evt.target.photos.value.split(', '),
         quantity: Number(evt.target.quantity.value),
         available: !!evt.target.availability.value,
-        categories: evt.target.categories.value
+        categories: evt.target.categories.value.split(',')
       }))
     }
   }

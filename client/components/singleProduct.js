@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom'
 import {pushPurchase} from '../store'
 
 const SingleProduct = (props) => {
-
     const {products, handleClick, isAdmin} = props
     const product = products.find(prod => {
       return prod.id === Number(props.match.params.productId)
     })
     const produceStars = (numStars) => {
       let stars = ''
-
       for (let i = 0; i < numStars; i++) {
         stars += '⭐️ '
       }
