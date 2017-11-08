@@ -28,6 +28,9 @@ body {
 .cart-photo {
   width: 50px;
 }
+#cart-page  {
+  margin-left: 30px;
+}
 
 .product-photos-1{
   height: 10%;
@@ -42,6 +45,10 @@ body {
     opacity: 0.4
 
 
+}
+.counter {
+  z-index: 1;
+  color: black;
 }
 
 .product-images-2{
@@ -66,15 +73,12 @@ body {
   display: inline;
 }
 
-.buy > * {
-  display: inline;
-}
-
 .footer {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 2;
 }
 
 .category {

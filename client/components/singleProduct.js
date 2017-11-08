@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {pushPurchase} from '../store'
 
 const SingleProduct = (props) => {
-    const {products, handleClick} = props
+    const {products, handleClick, isAdmin} = props
     const product = products.find(prod => {
       return prod.id === Number(props.match.params.productId)
     })
@@ -16,8 +16,16 @@ const SingleProduct = (props) => {
       return stars
     }
     return (
-
+    <div className="product-container">
       <div className="card">
+          {
+            isAdmin &&
+            <Link to={`/${product.id}/edit-product`}>
+            <a className="btn-floating btn-large red">
+              <i className="large material-icons">mode_edit</i>
+            </a>
+            </Link>
+          }
         <div className="card-content">
           <h3>{product.title}</h3>
           <div className="row">
@@ -26,7 +34,7 @@ const SingleProduct = (props) => {
           </div>
           <div className="buy">
           <h3>${product.price}</h3>
-          <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} value={product.id}><i className="material-icons">+</i></a>
+          <a className="btn-floating btn-large waves-effect waves-light red" onClick={handleClick} name={product.id}>+</a>
           </div>
         </div>
         <div className="card-tabs">
@@ -65,16 +73,22 @@ const SingleProduct = (props) => {
           </div>
         </div>
       </div>
+    </div>
     )
 }
 
-const mapState = ({products}) => ({products})
+const mapState = (state) => {
+  return {
+    products: state.products,
+    isAdmin: state.user.admin
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     handleClick(evt) {
       evt.preventDefault()
-      dispatch(pushPurchase(evt.target.value))
+      dispatch(pushPurchase(evt.target.name))
     }
   }
 }

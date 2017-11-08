@@ -63,7 +63,6 @@ router.post('/:productId/reviews', (req, res, next) => {
   .catch(err => console.error(err))
 })
 
-//This needs to talk to a thunk creator that will send back an array of objects containing purcahses, some form with categories
 router.post('/', (req, res, next) => {
   Product.create(req.body)
   .then(product =>

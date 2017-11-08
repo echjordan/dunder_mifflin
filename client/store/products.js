@@ -44,8 +44,9 @@ export const postReview = (id, review) => (dispatch) => {
 }
 
 export const changeProduct = (id, data) => (dispatch) => {
-  axios.post(`/api/products/${id}`, data)
-  .then(product => {dispatch(updateProduct(product))
+  axios.put(`/api/products/${id}`, data)
+  .then(product => {
+    dispatch(updateProduct(product))
   })
   .catch(err => console.error(err))
 }
