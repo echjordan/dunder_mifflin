@@ -23,7 +23,7 @@ export class Cart extends Component{
     let value;
     if (evt.target.value)  {value = 0;}
     else {value = evt.target.value }
-    this.props.editPurchase(evt.target.name, evt.target.value)
+    this.props.editPurchase(evt.target.name, value)
 
 
   }
